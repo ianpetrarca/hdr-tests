@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html x-cloak x-data="app" :class="{ '': window.color==='light', 'dark': window.color==='dark' }"  lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Foveate</title>
+
+    <script type="module" src="./scene.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+    <script src="https://unpkg.com/hold-event@0.2.0/dist/hold-event.min.js"></script>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
+    <script>     
+      window.data = {
+        id: window.location.search.slice(2,window.location.search.length),
+        title:'Example Project Title',
+        creator:'Bob Smith',
+        caption:" Example Project Caption",
+        thumbnail:'https://storage.googleapis.com/download/storage/v1/b/foveate-app.appspot.com/o/thumbnails%2FxfXF7Sky1c5k4HuvPjlW.png?generation=1704993589193965&alt=media',
+        side:'left',
+        color:'dark',
+        fontColor:'light',
+      }
+
+      
+    </script>
+
+  </head>
+
+  <body @mouseenter="mouse_hover = true" @mouseleave="mouse_hover = false" class="select-none overflow-hidden h-screen w-screen cursor-pointer">
+
+    <div x-show="!sceneRendered" x-transition.opacity.duration.1000ms.delay.800ms style="z-index:100" class=" fixed top-0" id="loading_container">
+      <img style="z-index:999" id="image_test" src="https://storage.googleapis.com/download/storage/v1/b/foveate-app.appspot.com/o/thumbnails%2FxfXF7Sky1c5k4HuvPjlW.png?generation=1704993589193965&alt=media" class="pointer-events-none w-screen h-screen object-cover">
+
+      <div style="z-index:999" id="" class="flex items-center pointer-events-none fixed top-0 backdrop-blur-3xl w-screen h-screen">      
+          <div tyle="z-index:999" class="px-6 py-24 sm:py-32 lg:px-8 mx-auto">
+              <div class="mx-auto max-w-2xl text-center">
+                  <h2 x-text="window.title" class="mt-2 text-2xl lg:text-5xl 2xl:text-6xl font-normal tracking-tight text-white sm:text-6xl">Support center</h2>
+                  <p  x-text="'Loading Assets ' + parseInt(loadingProgress) + '%' + ' '" class="mt-2 text-lg leading-8 text-gray-400">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
+              </div>
+          </div>
+
+      </div>
+    </div>
+
+    <div id="app"></div>
+
+  </body>
+
+</html>

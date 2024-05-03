@@ -1,0 +1,206 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+body{
+  font-family: 'Foveate';
+  scrollbar-width: 5px
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  border:none;
+}
+
+#vignette {
+  position: fixed;
+  box-shadow: 0 0 10vw rgba(0, 136, 255, 1) inset;
+}
+
+#zoom::-webkit-slider-thumb {
+
+  box-shadow:none;
+  -webkit-appearance: none;
+  margin-top: 0px; /* Centers thumb on the track */
+  background-color: #ffffff;
+  height: 1rem;
+  width: 0.25rem;   
+  border-radius: 0%;
+}
+
+textarea { line-height: 1.5;}
+
+textarea::-webkit-scrollbar {
+  width: 2px;
+  border:none;
+}
+
+p::-webkit-scrollbar {
+  width: 2px;
+  border:none;
+}
+
+
+
+input[type='range']::-webkit-slider-thumb {
+  scale: calc(.85);
+  box-shadow: 0px 0px 1px 1px rgba(0,0,0,1);
+  background-color: white;
+  color:white;
+  border-radius: 50%;
+}
+
+ul::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgb(25, 25, 25,.2); 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius:10%;
+  background: #cecccc; 
+}
+
+::-webkit-scrollbar-corner { background: rgba(0,0,0,0); }
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+progress::-moz-progress-bar {
+  background: #dc05057d;
+}
+
+/* For Chrome or Safari */
+progress::-webkit-progress-value {
+  background: #ffffff7d;
+}
+
+/* For IE10 */
+progress {
+  background: #ffffff7d;
+}
+
+.loader {
+  width: 84px;
+  height: 84px;
+  position: relative;
+  overflow: hidden;
+}
+.loader:before , .loader:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width:64px;
+  height: 64px;
+  border-radius: 50%;
+  background:#0088FF;
+  transform: translate(-50% , 100%)  scale(0);
+  animation: push 2s infinite ease-in;
+}
+.loader:after {
+animation-delay: 1s;
+}
+@keyframes push {
+    0% {
+      transform: translate(-50% , 100%)  scale(1);
+    }
+    15% , 25%{
+      transform: translate(-50% , 50%)  scale(1);
+    }
+  50% , 75% {
+      transform: translate(-50%, -30%) scale(0.5);
+    }
+  80%,  100% {
+      transform: translate(-50%, -50%) scale(0);
+    }
+}
+
+
+
+  
+  [x-cloak] { display: none !important; }
+
+
+  input {
+    border-radius: 0;
+  }
+  
+  input[type="search"] {
+    -webkit-appearance: none;
+  }
+  
+  font-face {
+    font-family: "Foveate";
+    src: url("https://foveate3dn.nyc3.cdn.digitaloceanspaces.com/production/font/RedHatDisplay-Foveate-Black.ttf") format("truetype");
+    font-weight: 900;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: "Foveate";
+    src: url("https://foveate3dn.nyc3.cdn.digitaloceanspaces.com/production/font/RedHatDisplay-Foveate-ExtraBold.ttf") format("truetype");
+    font-weight: 800;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: "Foveate";
+    src: url("https://foveate3dn.nyc3.cdn.digitaloceanspaces.com/production/font/RedHatDisplay-Foveate-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: "Foveate";
+    src: url("https://foveate3dn.nyc3.cdn.digitaloceanspaces.com/production/font/RedHatDisplay-Foveate-SemiBold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: "Foveate";
+    src: url("https://foveate3dn.nyc3.cdn.digitaloceanspaces.com/production/font/RedHatDisplay-Foveate-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: "Foveate";
+    src: url("https://foveate3dn.nyc3.cdn.digitaloceanspaces.com/production/font/RedHatDisplay-Foveate-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: "Foveate";
+    src: url("https://foveate3dn.nyc3.cdn.digitaloceanspaces.com/production/font/RedHatDisplay-Foveate-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+  }
+
+  #transport_control
+  {
+      position: fixed;
+      right: 0;
+      left: 0;
+      margin-right: auto;
+      margin-left: auto;
+      min-height: 10em;
+      width: 10%;
+      background-color: blue;
+  }

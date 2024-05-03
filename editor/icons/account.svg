@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <rect x="5.34" y="5.28" width="13.37" height="13.42" rx="3.56" ry="3.56" style="fill: none; stroke: #000; stroke-linecap: round; stroke-miterlimit: 10;"/>
+  <path d="M9.14,13.54c.2,.2,1.22,1.44,2.86,1.46,1.65,.02,2.71-1.23,2.9-1.42" style="fill: none; stroke: #000; stroke-linecap: round; stroke-miterlimit: 10;"/>
+  <circle cx="9.42" cy="10.17" r=".09" style="fill: none; stroke: #000; stroke-linecap: round; stroke-miterlimit: 10;"/>
+  <circle cx="14.81" cy="10.17" r=".09" style="fill: none; stroke: #000; stroke-linecap: round; stroke-miterlimit: 10;"/>
+</svg>

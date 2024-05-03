@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <path d="M19.67,16.14H4.33c-.38,0-.62-.37-.43-.66l3.88-6.22c.09-.14,.25-.23,.43-.23h7.58c.18,0,.34,.09,.43,.23l3.88,6.22c.19,.3-.05,.66-.43,.66Z" style="fill: none; stroke: #000; stroke-linejoin: round;"/>
+  <line x1="8.26" y1="16.25" x2="10.36" y2="9.14" style="fill: none; stroke: #000; stroke-linejoin: round;"/>
+  <line x1="15.91" y1="16.14" x2="13.76" y2="9.03" style="fill: none; stroke: #000; stroke-linejoin: round;"/>
+  <line x1="18.48" y1="12.96" x2="5.52" y2="12.96" style="fill: none; stroke: #000; stroke-linejoin: round;"/>
+  <line x1="16.87" y1="10.72" x2="6.9" y2="10.72" style="fill: none; stroke: #000; stroke-linejoin: round;"/>
+</svg>

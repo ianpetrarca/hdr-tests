@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "foveate-app"
+  },
+  "targets": {
+    "foveate-app": {
+      "hosting": {
+        "assets": [
+          "foveate-assets"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <polyline points="5.83 16.03 8.15 16.03 10.12 16.03 18.17 16.03" style="fill: none; stroke: #000; stroke-linejoin: round;"/>
+  <polyline points="18.17 8.03 10.12 8.03 8.15 8.03 5.83 8.03" style="fill: none; stroke: #000; stroke-linejoin: round;"/>
+  <line x1="18.17" y1="12.08" x2="5.83" y2="12.08" style="fill: none; stroke: #000; stroke-linejoin: round;"/>
+</svg>

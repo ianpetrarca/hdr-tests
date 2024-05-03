@@ -1,0 +1,367 @@
+<!-- Progress Bar -->
+<progress x-show="!sceneRendered" x-bind:value="loadingProgress" style="z-index:999" class="top-0 pointer-events-none fixed w-screen h-0.5 rounded-2xl opacity-80" id="loading_progress" value="" max="100"> </progress>
+    
+<!-- Navbar -->
+<div x-bind:class="embed ? 'top-0' : 'top-0'" >
+    <nav x-show="sceneRendered" x-transition.opacity.duration.500ms style="z-index:990" class="bg-white dark:bg-foveate-black md:bg-transparent dark:md:bg-transparent fixed w-screen h-fit md:h-14 items-center inline-flex md:px-4 cursor-pointer transition-colors duration-200">
+
+        <!-- Logo  -->
+        <div x-show="sceneRendered" class="w-fit inline-flex items-center h-fit rounded-lg overflow-visible   p-1">
+
+            <a x-show="!embed" href="../" class="transition-all duration-300 cursor-pointer ml-px w-fit rounded-lg bg-white dark:bg-foveate-black/90 backdrop-blur-3xl">
+                <div class="shadow-2xl flex flex-shrink-0 items-center rounded-lg p-2 h-9 w-9 justify-center hover:opacity-80 transition-all duration-300">
+                    <img class="object-contain h-5 w-auto" src="https://foveate3dn.nyc3.cdn.digitaloceanspaces.com/production/images/echo_transparent.png" alt="Your Company">
+                </div>
+            </a>
+
+            <span x-show="!embed" :class="{ 'dark:text-white text-gray-800 md:text-white': window.fontColor==='light', 'dark:text-white dark:md:text-gray-800 text-gray-800': window.fontColor==='dark' }" 
+            x-text="window.title" class="font-semibold rounded-lg ml-2 md:ml-4 py-1 bg-transparent hover:opacity-80 truncate text-xl ... text-center w-fit"> Test 123</span> 
+        </div>
+
+        <!-- Navbar Buttons -->
+        <div x-transition.opacity.duration.300ms class="bg-white dark:bg-foveate-black/90 w-fit ml-auto px-2 py-2 md:p-3 rounded-xl inline-flex items-center transition-all duration-300 backdrop-blur-3xl cursor-pointer">
+            <div style="z-index:999" class="ml-auto rounded-md inline-flex items-center space-x-3.5">
+       
+                <svg x-bind:class="app_ui_state.momentsPanel ? 'text-black dark:text-white' : 'text-gray-400'" @click="app_ui_state.momentsPanel = !app_ui_state.momentsPanel" xmlns="http://www.w3.org/2000/svg" class="cursor-pointer hover:opacity-80 hover:text-black dark:text-white h-5 w-5 icon icon-tabler icon-tabler-list-details mr-4 md:mr-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M13 5h8"></path>
+                    <path d="M13 9h5"></path>
+                    <path d="M13 15h8"></path>
+                    <path d="M13 19h5"></path>
+                    <path d="M3 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"></path>
+                    <path d="M3 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"></path>
+                </svg>
+
+                <svg @click="showMoments();app_ui_state.annotations = !app_ui_state.annotations" x-show="!app_ui_state.annotations"  xmlns="http://www.w3.org/2000/svg" class="text-gray-400 hover:text-black dark:text-white icon icon-tabler icon-tabler-plus cursor-pointer hover:opacity-80 h-5 w-5 hidden md:block icon icon-tabler icon-tabler-sticker-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 4h12a2 2 0 0 1 2 2v7h-5a2 2 0 0 0 -2 2v5h-7a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2z" /><path d="M20 13v.172a2 2 0 0 1 -.586 1.414l-4.828 4.828a2 2 0 0 1 -1.414 .586h-.172" /></svg>
+
+                <svg @click="hideMoments();app_ui_state.annotations = !app_ui_state.annotations" x-show="app_ui_state.annotations"  xmlns="http://www.w3.org/2000/svg" class="text-black dark:text-white hover:text-gray-400 icon icon-tabler icon-tabler-plus cursor-pointer hover:opacity-80 h-5 w-5 hidden md:block icon icon-tabler icon-tabler-sticker-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 4h12a2 2 0 0 1 2 2v7h-5a2 2 0 0 0 -2 2v5h-7a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2z" /><path d="M20 13v.172a2 2 0 0 1 -.586 1.414l-4.828 4.828a2 2 0 0 1 -1.414 .586h-.172" /></svg>
+
+                <svg  @click="mute = !mute;toggleMute()" x-show="!mute" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="text-black dark:text-white hover:text-black dark:text-white mx-auto h-5 w-5 cursor-pointer hover:opacity-80 hidden md:block">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
+                </svg>
+
+                <svg  @click="mute = !mute;toggleMute()" x-show="mute" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="text-gray-400 hover:text-gray-400 mx-auto h-5 w-5 cursor-pointer hover:opacity-80 hidden md:block">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 9.75L19.5 12m0 0l2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6l4.72-4.72a.75.75 0 011.28.531V19.94a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.506-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.395C2.806 8.757 3.63 8.25 4.51 8.25H6.75z" />
+                </svg>
+
+                <svg  @click="fullscreen = !fullscreen;toggleFullscreen()"  x-show="!fullscreen" class="cursor-pointer hover:opacity-80 md:inline-flex hidden text-gray-400 hover:text-black dark:text-white h-5 w-5 transform rotate-180 " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
+                </svg>
+
+                <svg  @click="fullscreen = !fullscreen;toggleFullscreen()" x-show="fullscreen" class="cursor-pointer hover:opacity-80 md:inline-flex hidden text-black dark:text-white hover:text-gray-400 h-5 w-5 transform rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5l5.25 5.25" />
+                </svg>
+
+            </div>
+        </div>
+
+    </nav>
+</div>
+    
+<!-- Moments List -->
+<div x-show="sceneRendered && app_ui_state.momentsPanel" x-transition.duration.200ms style="z-index:900" :class="{ 'right-4': window.side==='left', 'right-4 md:left-4': window.side==='right' }" class="fixed pointer-events-auto max-w-sidemenu-mobile min-w-max h-fit max-h-screen-3/4 w-full flex flex-col rounded-lg overflow-hidden">
+    <div 
+    x-bind:class="embed ? 'mt-16' : 'mt-16'"
+    x-data="{help:false}" @mouseenter="help=true" @mouseleave="help=false" style="z-index:999" class="h-fit max-h-screen-3/4 w-full max-w-md rounded-lg overflow-hidden shadow-2xl">
+        
+        <!-- Asset Menu Header -->
+        <div class="flex w-full pr-2 pl-2.5 bg-white/95 dark:bg-foveate-black/90 backdrop-blur-2xl">
+            <span class="text-gray-900 dark:text-gray-200 inline-flex items-center text-left font-semibold tracking-wide text-sm h-fit my-2 w-full"> 
+            
+                Moments
+            
+                <div class="gap-x-1.5 inline-flex items-center ml-auto">
+
+                <svg style="z-index:999" @click="app_ui_state.momentsPanel = false" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="cursor-pointer hover:opacity-80 w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+
+                </div>
+            
+            </span>
+        </div>
+
+        <ul id="moments" class="flex flex-col bg-white/95 dark:bg-foveate-black/90 backdrop-blur-2xl pb-2">
+            
+            <template x-for="moment in moment_order" :key="moment">
+                <li x-data="{edit:false}" @click="currentMoment = moment;selectedMoment = moment;"  x-bind:id="moment" x-bind:class="moment === currentMoment ? 'bg-gray-300 dark:bg-white/10' : ''"
+                class="border-b border-gray-500/30 active:cursor-ns-resize hover:cursor-pointer transition-colors duration-300 handle w-full items-center inline-flex h-full pl-2.5 pr-1.5 py-1.5 hover:bg-gray-300 dark:hover:bg-white/10">
+                
+                <div x-data="{hover:false}" @mouseenter="hover = true" @mouseleave="hover = false" class="w-full h-fit inline-flex items-center">
+
+                    <div @click="currentMoment = moment;selectedMoment = moment"
+                    x-bind:class="moment === currentMoment ? 'bg-white/80 text-black' : 'border-white/10 text-gray-700 dark:text-gray-300'"
+                    class="h-5 w-5 p-0.5 inline-flex items-center justify-center rounded-md border">
+                        <span x-text="moment_order.indexOf(moment)+1" class="cursor-pointer inline-flex text-xxs font-medium truncate ... mx-auto">  </span>
+                    </div>
+
+                    <span @click="currentMoment = moment;selectedMoment = moment" 
+                    x-bind:class="moment === currentMoment ? 'text-black dark:text-white' : 'text-gray-700 dark:text-gray-300'"
+                    x-text="momentsDB[moment].title" class="cursor-pointer ml-3 w-40 text-xs truncate ... h-full items-center mr-auto text-gray-300'">  </span>
+                
+                </div>
+
+                </li>
+
+            </template>
+
+            <li x-show="moment_order.length===0" @click="addMoment()" class="border-b border-gray-500/30 active:cursor-ns-resize hover:cursor-pointer transition-colors duration-300 handle w-full items-center inline-flex h-full pl-2.5 pr-1.5 py-2 hover:bg-white/10">
+                
+                <div x-data="{hover:false}" @mouseenter="hover = true" @mouseleave="hover = false" class="w-full h-fit inline-flex items-center">
+
+                <span class="text-black dark:text-white text-xs w-full text-center inline-flex items-center justify-center gap-x-1"> Add Moment
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 icon icon-tabler icon-tabler-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M12 5l0 14"></path>
+                    <path d="M5 12l14 0"></path>
+                </svg>
+
+                </span>
+
+                </div>
+
+            </li>
+
+        </ul>
+
+    </div>
+</div>    
+
+<!-- Desktop Moments Label Panel -->
+<div :class="{ 'left-4': window.side==='left', 'right-4': window.side==='right' }" x-show="sceneRendered" x-transition.opacity.duration.500ms style="z-index:990" x-data="{minimize:false, mobile_menu:false}" class="fixed w-fit bottom-0 md:bottom-4 mb-1 hidden lg:flex">
+
+    <div x-bind:class="moments_ui.minimize ? 'h-fit px-4 py-2' : 'h-fit p-5 pt-3 min-w-[400px]'" class=" max-w-md bg-white dark:bg-foveate-black/90 backdrop-blur-3xl shadow-2xl md:rounded-xl overflow-visible items-center space-y-3">
+        
+        <div class="w-full flex items-center h-1/6">
+            <!-- MOMENT LABEL -->
+            <span class="text-black dark:text-white text-xl truncate ..." x-text="momentsDB[currentMoment].title"></span>
+        
+            <div x-bind:class="moments_ui.minimize ? 'ml-4' : 'ml-auto'" x-show="" class="flex w-fit gap-x-3 h-full">
+            
+                <div @click="moments_ui.minimize = !moments_ui.minimize" class="w-8 p-1.5 h-full rounded-full bg-white/5 hover:bg-white/30 text-gray-300 inline-flex items-center">
+                    <svg x-show="moments_ui.minimize" xmlns="http://www.w3.org/2000/svg" class="cursor-pointer hover:opacity-80 h-full w-full text-black dark:text-white icon icon-tabler icon-tabler-window-maximize" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M18 10h-4v-4"></path>
+                        <path d="M20 4l-6 6"></path>
+                        <path d="M6 14h4v4"></path>
+                        <path d="M10 14l-6 6"></path>
+                    </svg>
+
+                    <svg x-show="!moments_ui.minimize" xmlns="http://www.w3.org/2000/svg" class="text-black dark:text-white h-4 w-4 icon icon-tabler icon-tabler-arrows-diagonal" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M16 4l4 0l0 4"></path>
+                        <path d="M14 10l6 -6"></path>
+                        <path d="M8 20l-4 0l0 -4"></path>
+                        <path d="M4 20l6 -6"></path>
+                    </svg>
+                </div>
+
+            </div>
+        </div>
+
+        <div x-show="!moments_ui.minimize" class="w-full flex h-fit">
+            <span class="w-full h-fit pb-2 bg-transparent text-sm text-black dark:text-white pr-1" x-text="momentsDB[currentMoment].caption"></span>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Mobile Caption Panel -->
+<div x-show="app_ui_state.mobileCaption" style="z-index:990" class="w-screen h-screen flex fixed top-0 z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+
+    <div class="fixed inset-0 bg-foveate-black bg-opacity-75 transition-opacity pointer-events-none -z-10"></div>
+    
+    <div class="bg-white dark:bg-foveate-black h-fit shadow rounded-lg z-10 my-auto overflow-hidden w-full mx-4 md:mx-auto p-6 md:py-5">
+        <div class="block w-full h-full overflow-hidden">
+
+            <div class="w-full h-full inline-flex items-center">
+                <span 
+                x-text="momentsDB[currentMoment].title"
+                class="text-black dark:text-white text-left font-semibold block text-base"></span>
+                <div @click="app_ui_state.mobileCaption = false" class="ml-auto hover:opacity-50 cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="text-black dark:text-white icon icon-tabler icon-tabler-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
+                </div>
+            </div> 
+
+            <span x-text="momentsDB[currentMoment].caption" class="text-black dark:text-white text-left font-semibold block text-smlg mt-4 max-h-[200px] pr-2 overflow-y-scroll overflow-x-hidden"></span>
+            <div class="flex w-full gap-x-4 flex-grow mt-4">   
+                <a x-show="momentsDB[currentMoment].url.length>0" x-bind:href="momentsDB[currentMoment].url" :class="{ 'bg-foveate-blue': !app_ui_state.copying, 'bg-green-500': app_ui_state.copying }" @click="copyShareLink()" class="w-full bg-foveate-blue hover:opacity-90 cursor-pointer active:opacity-70 inline-flex items-center h-fit py-1 text-center mt-4 rounded-md">
+                    <span class="text-base text-white font-semibold items-center text-center inline-flex justify-center w-full gap-x-2"> 
+                        <span x-show="!app_ui_state.copying"> View External Link </span>
+                        <svg xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="h-4 w-4 icon icon-tabler icons-tabler-outline icon-tabler-link"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 15l6 -6" /><path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" /><path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" /></svg>
+                    </span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+        
+</div>
+
+<!-- Share Moment Panel -->
+<div x-show="moments_ui.sharePanel" style="z-index:990" class="w-screen h-screen flex fixed top-0 z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+
+    <div class="fixed inset-0 bg-foveate-black bg-opacity-75 transition-opacity pointer-events-none -z-10"></div>
+    
+    <div class="bg-white dark:bg-foveate-black min-h-[375px] h-fit shadow rounded-lg z-10 my-auto overflow-hidden w-fit mx-auto md:mx-auto p-6 md:py-5">
+        <div class="block w-full h-full overflow-hidden">
+            <div class="w-full h-full inline-flex items-center">
+                <span class="text-black dark:text-white text-left font-semibold block text-xl"> Share Moment</span>
+                <div @click="moments_ui.sharePanel = false" class="ml-auto hover:opacity-50 cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="text-black dark:text-white icon icon-tabler icon-tabler-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
+                </div>
+            </div> 
+            <span class="mt-2 flex w-full truncate ... text-md text-black dark:text-gray-400" x-text="momentsDB[currentMoment].title" >  </span>
+            <div class="w-full h-full px-0 mt-4" id="qrcode"></div>
+            <div class="flex w-full">
+                     
+            <div 
+            :class="{ 'bg-foveate-blue': !app_ui_state.copying, 'bg-green-500': app_ui_state.copying }"
+            @click="copyShareLink()" class="w-full bg-foveate-blue hover:opacity-90 cursor-pointer active:opacity-70 inline-flex items-center h-fit py-1 text-center mt-4 rounded-md">
+                <span class="text-smlg text-white font-semibold items-center text-center inline-flex justify-center w-full gap-x-2"> <span x-show="!app_ui_state.copying"> Copy Moment Link </span>
+                <span x-show="app_ui_state.copying"> Copied Link </span>
+                    <svg x-show="!app_ui_state.copying" xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="h-4 w-4 icon icon-tabler icons-tabler-outline icon-tabler-link"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 15l6 -6" /><path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" /><path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" /></svg>
+                
+                    <svg x-show="app_ui_state.copying" xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="h-4 w-4 icon icon-tabler icons-tabler-outline icon-tabler-check"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg>
+                </span>
+            </div>
+
+            </div>
+        </div>
+    </div>
+        
+</div>
+
+<!-- Share AR Panel -->
+<div x-show="app_ui_state.arPanel && !moments_ui.sharePanel" style="z-index:990" class="w-screen h-screen flex fixed top-0 z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+
+    <div class="fixed inset-0 bg-foveate-black bg-opacity-75 transition-opacity pointer-events-none -z-10"></div>
+    
+    <div class="bg-white dark:bg-foveate-black min-h-[375px] h-fit shadow rounded-lg z-10 my-auto overflow-hidden w-fit mx-auto p-6 md:py-5">
+        <div class="block w-full h-full overflow-hidden">
+            
+            <div class="w-full h-full inline-flex items-center">
+                <span class="text-black dark:text-white text-left font-semibold block text-xl"> View Moment in AR</span>
+                <div @click="app_ui_state.arPanel = false" class="ml-auto hover:opacity-50 cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="text-black dark:text-white icon icon-tabler icon-tabler-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
+                </div>
+            </div> 
+
+            <span class="mt-2 flex w-full truncate ... text-md text-black dark:text-gray-400"> View on iOS and Apple Vision Pro.</span>
+           
+            <div class="w-full h-full px-0 mt-4" id="qrcode2"></div>
+
+            <div class="flex w-full">    
+            <div 
+            :class="{ 'bg-foveate-blue': !app_ui_state.copying, 'bg-green-500': app_ui_state.copying }"
+            @click="copyARLink()" class="w-full bg-foveate-blue hover:opacity-90 cursor-pointer active:opacity-70 inline-flex items-center h-fit py-1 text-center mt-4 rounded-md">
+                <span class="text-smlg text-white font-semibold items-center text-center inline-flex justify-center w-full gap-x-2"> <span x-show="!app_ui_state.copying"> Copy AR Link </span>
+                <span x-show="app_ui_state.copying"> Copied Link </span>
+                    <svg x-show="!app_ui_state.copying" xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="h-4 w-4 icon icon-tabler icons-tabler-outline icon-tabler-link"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 15l6 -6" /><path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" /><path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" /></svg>
+                
+                    <svg x-show="app_ui_state.copying" xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="h-4 w-4 icon icon-tabler icons-tabler-outline icon-tabler-check"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg>
+                </span>
+            </div>
+
+            </div>
+
+        </div>
+    </div>
+        
+</div>
+
+<!-- Transport -->
+<div x-show="sceneLoaded" x-data="{open:false}" style="z-index:980" class="fixed bottom-6 w-screen h-fit inline-flex items-center px-4 overflow-hidden">
+    <div class="w-full h-fit">
+
+        <div class="w-fit flex bg-white dark:bg-foveate-black/90 backdrop-blur-3xl shadow-2xl p-2 py-1 mx-auto rounded-2xl">
+            <div
+            :class="{ 'opacity-100 pointer-events-auto': playing, 'opacity-50 pointer-events-none': !playing }"
+            @click="prevFreeform()" class="h-auto flex items-center cursor-pointer">
+
+                <div class="inline-flex rounded-lg h-auto mx-auto items-center">
+                    <svg class="text-black dark:text-white h-9 w-9 hover:opacity-80" stroke="currentColor" id="Icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M17.95,12.08H6.09m4.29-4.33l-4.29,4.32h0s4.25,4.27,4.25,4.27" style="fill: none; stroke-linejoin: round; stroke-width: 1.5px;"/>
+                    </svg>
+                </div>
+
+            </div>
+            
+            <div @click="transport()" class="h-auto items-center inline-flex cursor-pointer">
+                    <svg
+                    x-bind:class="playing ? 'hidden' : ''"
+                    id="arrow_right_btn"
+                    class="text-black dark:text-white hover:opacity-80 h-10 w-10 mx-auto my-auto" stroke="currentColor" id="Icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M7.88,12v-3.72c0-.99,1.09-1.6,1.94-1.08l2.94,1.81,3.11,1.91c.81,.5,.81,1.67,0,2.17l-3.11,1.91-2.94,1.81c-.85,.52-1.94-.09-1.94-1.08v-3.72Z" style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5px;"/>
+                    </svg>
+
+                    <svg
+                    x-bind:class="!playing ? 'hidden' : ''"
+                    class="text-black dark:text-white hover:opacity-80 h-10 w-10 mx-auto my-auto" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M9.42,7.95v8.11M14.51,7.95v8.11" style="fill: none; stroke-linejoin: round;"/>
+                    </svg>
+            
+            </div>
+
+            <div
+            :class="{ 'opacity-100 pointer-events-auto': playing, 'opacity-50 pointer-events-none': !playing }"
+            @click="nextFreeform()" class="h-auto flex items-center cursor-pointer">
+                <div class="inline-flex rounded-lg h-auto mx-auto items-center">
+                    <svg 
+                    id="arrow_right_btn"
+                    class="text-black dark:text-white hover:opacity-80 h-9 w-9 mx-auto" stroke="currentColor" id="Icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M6.09,12.02h11.86m-4.29,4.33l4.29-4.32h0s-4.25-4.27-4.25-4.27" style="fill: none; stroke-linejoin: round; stroke-width: 1.5px;"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Sidemenu -->
+<div :class="{ 'right-4': window.side==='left', 'left-4': window.side==='right' }" x-show="sceneLoaded" x-transition.opacity.duration.300ms style="z-index:982" class="fixed bottom-6 w-12 space-y-4 block">
+
+    <div @click="exportUSDZ(currentMoment)" x-show="moments_ui.mobileMenu && momentsDB[currentMoment].usdzSelection != 'null' " class="bg-white dark:bg-foveate-black/90 backdrop-blur-lg w-12 h-12 inline-flex items-center rounded-full">
+        <svg xmlns="http://www.w3.org/2000/svg" class="text-black dark:text-white mx-auto icon icon-tabler icon-tabler-augmented-reality" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 8v-2a2 2 0 0 1 2 -2h2" /><path d="M4 16v2a2 2 0 0 0 2 2h2" /><path d="M16 4h2a2 2 0 0 1 2 2v2" /><path d="M16 20h2a2 2 0 0 0 2 -2v-2" /><path d="M12 12.5l4 -2.5" /><path d="M8 10l4 2.5v4.5l4 -2.5v-4.5l-4 -2.5z" /><path d="M8 10v4.5l4 2.5" /></svg>
+    </div> 
+
+    <a x-show="moments_ui.mobileMenu && momentsDB[currentMoment].url.length>0" target="_blank" class="w-full h-full rounded-full text-gray-300 hidden md:inline-flex items-center" x-bind:href="momentsDB[currentMoment].url">
+
+        <div class="bg-white dark:bg-foveate-black/90 backdrop-blur-lg w-12 h-12 inline-flex items-center rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="text-black dark:text-white mx-auto icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 15l6 -6" /><path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" /><path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" /></svg>   
+        </div>
+
+    </a>
+
+    <div x-show="moments_ui.mobileMenu && momentsDB[currentMoment]" @click="moments_ui.sharePanel = true;generateQRCode()" class="bg-white dark:bg-foveate-black/90 backdrop-blur-lg w-12 h-12 inline-flex items-center rounded-full">
+   
+        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="text-black dark:text-white mx-auto icon icon-tabler icons-tabler-outline icon-tabler-share-3"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M13 4v4c-6.575 1.028 -9.02 6.788 -10 12c-.037 .206 5.384 -5.962 10 -6v4l8 -7l-8 -7z" /></svg>
+   
+    </div>
+
+    <div @click="app_ui_state.mobileCaption = true" class="bg-white dark:bg-foveate-black/90 backdrop-blur-lg w-12 h-12 inline-flex md:hidden items-center rounded-full"> 
+  <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="text-black dark:text-white mx-auto  icon icon-tabler icons-tabler-outline icon-tabler-article"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /><path d="M7 8h10" /><path d="M7 12h10" /><path d="M7 16h10" /></svg>
+    </div>
+
+    <div @click="moments_ui.mobileMenu = !moments_ui.mobileMenu" class="bg-white dark:bg-foveate-black/90 backdrop-blur-lg w-12 h-12 inline-flex items-center rounded-full">
+            
+        <svg x-show="moments_ui.mobileMenu" xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  
+        class="text-black dark:text-white mx-auto flex cursor-pointer hover:opacity-80 h-5 w-5 icon icon-tabler icons-tabler-outline icon-tabler-dots-vertical"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /></svg>
+
+        <svg x-show="!moments_ui.mobileMenu" xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="mx-auto flex h-5 w-5 text-black dark:text-white icon icon-tabler icons-tabler-outline icon-tabler-dots"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /></svg>
+
+    </div>
+
+</div>
+
+<div id="parent" style="position: fixed; width: 100%; height: 100%; pointer-events: none;">
+<div id="webgl" style="z-index:-10" class="fixed top-0 h-screen w-screen"></div>
+<div id="grid" style="z-index:0" class="fixed top-0 h-screen w-screen"></div>
+<div id="transform" style="z-index:10" class="fixed top-0 h-screen w-screen"></div>
+<div id="labels" style="position: fixed; width: 100vw; height: 100vh;"></div>
+</div>
+
+<a rel="ar" href="" download="asset.usdz" id="ar_link" class="pointer-events-none hidden">   <img class="hidden" id="button" width="100" src="https://threejs.org/examples/files/arkit.png"></a>

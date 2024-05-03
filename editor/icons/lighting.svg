@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <path d="M10.34,17.09v-2.42c-1.9,0-2.79-3.02-2.79-5.58s2.54-3.95,4.45-3.95,4.45,1.4,4.45,3.95-1.01,5.46-2.8,5.58c-.06,0,.01,2.42,.01,2.42" style="fill: none; stroke: #000; stroke-linejoin: round;"/>
+  <line x1="9.88" y1="17.99" x2="14.12" y2="17.99" style="fill: none; stroke: #000; stroke-miterlimit: 10;"/>
+  <line x1="10.43" y1="19.54" x2="13.56" y2="19.54" style="fill: none; stroke: #000; stroke-miterlimit: 10;"/>
+  <polyline points="13.1 12.58 10.9 12.58 11.99 12.58 11.99 17.06" style="fill: none; stroke: #000; stroke-miterlimit: 10;"/>
+</svg>

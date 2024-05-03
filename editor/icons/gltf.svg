@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="clippath">
+      <rect x="-87.48" y="-151.31" width="19.13" height="19.89" style="fill: none;"/>
+    </clipPath>
+    <clipPath id="clippath-1">
+      <rect x="-3.35" y="-155.67" width="23.75" height="24.08" style="fill: none;"/>
+    </clipPath>
+    <clipPath id="clippath-2">
+      <rect x="-60.3" y="-152.41" width="23.2" height="21.67" style="fill: none;"/>
+    </clipPath>
+  </defs>
+  <g id="Icons">
+    <line x1="12.02" y1="11.67" x2="12" y2="17.99" style="fill: none; stroke: #000; stroke-miterlimit: 10;"/>
+  </g>
+  <g id="Guides">
+    <g style="opacity: .79;">
+      <g style="clip-path: url(#clippath);">
+        <image width="1200" height="1600" transform="translate(-136.13 -263) scale(.19)" xlink:href="../signal-2023-01-02-202442_003.jpeg"/>
+      </g>
+    </g>
+    <g style="opacity: .72;">
+      <g style="clip-path: url(#clippath-1);">
+        <image width="1200" height="1600" transform="translate(-54.74 -339.11) scale(.22)" xlink:href="../signal-2023-01-02-202442_010.jpeg"/>
+      </g>
+    </g>
+    <g style="clip-path: url(#clippath-2);">
+      <image width="1200" height="1600" transform="translate(-109.73 -274.25) scale(.18)" xlink:href="../signal-2023-01-02-202442_009.jpeg"/>
+    </g>
+    <path d="M6.97,8.35l4.52-2.73c.35-.21,.79-.22,1.15-.02l4.58,2.59c.36,.2,.58,.58,.58,.99v5.14c0,.41-.22,.78-.57,.98l-4.62,2.67c-.35,.2-.77,.2-1.12,0l-4.48-2.5c-.36-.2-.58-.58-.58-.99v-5.18c0-.4,.21-.77,.55-.97Z" style="fill: none; stroke: #000; stroke-linejoin: round;"/>
+    <polyline points="12.04 18.14 12.04 11.79 6.58 8.75 12.04 11.79 17.64 8.61" style="fill: none; stroke: #000; stroke-linejoin: round;"/>
+  </g>
+</svg>

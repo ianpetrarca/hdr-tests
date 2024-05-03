@@ -1,0 +1,49 @@
+{
+  "name": "vite-test",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build --emptyOutDir && du -h dist",
+    "deploy": "npm run build && firebase deploy --only hosting:assets"
+  },
+  "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.0",
+    "@tailwindcss/forms": "^0.5.2",
+    "@tailwindcss/typography": "^0.5.4",
+    "autoprefixer": "^10.4.7",
+    "glob": "^7.1.6",
+    "postcss": "^8.4.14",
+    "postcss-cli": "^8.3.1",
+    "tailwindcss": "^3.1.6",
+    "three": "^0.160.0",
+    "tone": "^14.7.77",
+    "vite": "^4.0.0"
+  },
+  "dependencies": {
+    "@alpinejs/focus": "^3.11.1",
+    "@alpinejs/mask": "^3.12.3",
+    "@pmndrs/vanilla": "^1.14.1",
+    "alpinejs": "^3.12.3",
+    "alpinejs-sort": "^1.0.0",
+    "camera-controls": "^2.7.0",
+    "fflate": "^0.8.1",
+    "firebase": "^9.16.0",
+    "gltf-bounding-box": "^0.4.1",
+    "gsap": "^3.11.3",
+    "html2canvas": "^1.4.1",
+    "maath": "^0.10.4",
+    "n8ao": "^1.6.8",
+    "recordrtc": "^5.6.2",
+    "simple-dropzone": "^0.8.1",
+    "sortable": "^2.0.0",
+    "sortablejs": "^1.15.0",
+    "postprocessing": "^6.34.1",
+    "three.interactive": "^1.5.0",
+    "vite-node": "^0.27.2",
+    "vite-plugin-classname": "^0.0.3",
+    "vite-plugin-compress": "^2.1.0",
+    "vite-plugin-head": "^1.0.2",
+    "vite-plugin-minify": "^1.4.2",
+    "vite-plugin-obfuscator": "^1.0.5"
+  }
+}
