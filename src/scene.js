@@ -10,11 +10,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 
 
-const meshes = [];
-
-const PLANE_WIDTH = 2.5;
-const PLANE_HEIGHT = 2.5;
-const CAMERA_HEIGHT = 0.3;
+const SHADOW_MAP_WIDTH = 2048, SHADOW_MAP_HEIGHT = 1024;
 
 const state = {
 	shadow: {
@@ -43,6 +39,7 @@ const params = {
 	resolution:'4k',
 	blur:0,
 	exposure:1,
+	fov:50,
 	height: 15,
 	radius: 100,
 };
@@ -60,12 +57,28 @@ function init() {
 	document.body.appendChild( container );
 
 	camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 500 );
-	camera.position.set( 0, 40, - 50 );
-
+	camera.position.set( 0, 25, - 35 );
+	camera.fov = 50
 	scene = new THREE.Scene();
 	renderer = new THREE.WebGLRenderer();
 	renderer.toneMapping = THREE.ACESFilmicToneMapping;
-	renderer.toneMappingExposure = 1
+
+
+	let light = new THREE.DirectionalLight( 0xffffff, 3 );
+	light.position.set( 0, 1500, 1000 );
+	light.castShadow = true;
+	light.shadow.camera.top = 2000;
+	light.shadow.camera.bottom = - 2000;
+	light.shadow.camera.left = - 2000;
+	light.shadow.camera.right = 2000;
+	light.shadow.camera.near = 1200;
+	light.shadow.camera.far = 2500;
+	light.shadow.bias = 0.0001;
+
+	light.shadow.mapSize.width = SHADOW_MAP_WIDTH;
+	light.shadow.mapSize.height = SHADOW_MAP_HEIGHT;
+
+	scene.add( light );
 
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( window.innerWidth, window.innerHeight );
@@ -83,6 +96,7 @@ function init() {
 	gui.add( params, 'resolution', [ '2k','4k', '8k' ] ).onChange( changeEnvironment );
 	gui.add( params, 'height', 0, 100, 0.01 ).onChange( changeHeight );
 	gui.add( params, 'radius', 0, 1000, 0.01 ).onChange( changeRadius );
+	gui.add( params, 'fov', 1, 100, 0.01 ).onChange( changeFOV );
 	
 	gui.open();
 
@@ -94,14 +108,7 @@ function init() {
 		scene.add(gltf.scene)	
 		gltf.scene.scale.set(10,10,10)
 		
-			//Traverse GLTF Materials
-			gltf.scene.traverse((o) => {
-				if (o.isMesh){
-					o.castShadow = true;
-					o.receiveShadow = true;
-					o.frustumCulled = false
-				}
-			});
+	
 
 	})
 
@@ -170,6 +177,11 @@ function init() {
 			skybox.scale.setScalar(100)
 
 		});
+	}
+
+	function changeFOV(){
+		camera.fov = parseInt(params.fov)
+		camera.updateProjectionMatrix()
 	}
 
 }
