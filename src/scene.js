@@ -45,7 +45,9 @@ const params = {
 	environment: envNames[0],
 	resolution:'4k',
 	blur:0,
-	exposure:1
+	exposure:1,
+	height: 15,
+	radius: 100,
 };
 
 let container, stats;
@@ -82,7 +84,9 @@ function init() {
 	gui.add( params, 'environment', envNames  ).onChange( changeEnvironment );
 	gui.add( params, 'exposure', 0, 10, 0.01 ).onChange( changeExposure );
 	gui.add( params, 'resolution', [ '2k','4k', '8k' ] ).onChange( changeEnvironment );
-
+	gui.add( params, 'height', 0, 100, 0.01 ).onChange( changeHeight );
+	gui.add( params, 'radius', 0, 1000, 0.01 ).onChange( changeRadius );
+	
 	gui.open();
 
 	const dracoLoader = new DRACOLoader(); //DRACO Loader 
@@ -126,6 +130,14 @@ function init() {
 	initShadows()
 
 	changeEnvironment()
+
+	function changeHeight(){
+		skybox.height = params.height
+	}
+
+	function changeRadius(){
+		skybox.radius = params.radius
+	}
 
 	function changeExposure(){
 		console.log(params.exposure)
