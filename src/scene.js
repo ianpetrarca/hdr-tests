@@ -39,7 +39,7 @@ function extractNames(obj) {
 
 const envNames = extractNames(environments);
 const params = {
-	environment: envNames[0],
+	environment: envNames[7],
 	resolution:'4k',
 	blur:0,
 	exposure:1,
