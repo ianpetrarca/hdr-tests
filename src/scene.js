@@ -33,16 +33,20 @@ function extractNames(obj) {
 	return Object.values(obj).map(item => item.name);
 }
 
-const envNames = extractNames(environments);
-const params = {
-	environment: envNames[7],
+let selectedEnvironment = 7
+
+let envNames = extractNames(environments);
+let params = {
+	environment: envNames[selectedEnvironment],
 	resolution:'4k',
 	blur:0,
 	exposure:1,
 	fov:50,
-	height: 15,
-	radius: 100,
+	height: environments[selectedEnvironment].height,
+	radius: environments[selectedEnvironment].radius,
+	shadowIntensity: 1,
 };
+
 
 let container, stats;
 let camera, scene, renderer, controls;
@@ -77,14 +81,37 @@ function init() {
 	window.addEventListener( 'resize', onWindowResize );
 
 	const gui = new GUI();
-	gui.add( params, 'environment', envNames  ).onChange( changeEnvironment );
-	gui.add( params, 'exposure', 0, 10, 0.01 ).onChange( changeExposure );
-	gui.add( params, 'resolution', [ '2k','4k', '8k' ] ).onChange( changeEnvironment );
-	gui.add( params, 'height', 0, 100, 0.01 ).onChange( changeHeight );
-	gui.add( params, 'radius', 0, 1000, 0.01 ).onChange( changeRadius );
-	gui.add( params, 'fov', 1, 100, 0.01 ).onChange( changeFOV );
-	
+	gui.add( params, 'environment', envNames  ).onChange( changeEnvironment ).listen();
+	gui.add( params, 'exposure', 0, 10, 0.01 ).onChange( changeExposure ).listen();
+	gui.add( params, 'resolution', [ '2k','4k', '8k' ] ).onChange( changeEnvironment ).listen();
+	gui.add( params, 'height', 0, 100, 0.01 ).onChange( changeHeight ).listen();
+	gui.add( params, 'radius', 0, 1000, 0.01 ).onChange( changeRadius ).listen();
+	gui.add( params, 'fov', 1, 100, 0.01 ).onChange( changeFOV ).listen();
+	gui.add( params, 'shadowIntensity', .01, 1, 0.01 ).onChange( changeShadow ).listen();
 	gui.open();
+
+	const light = new THREE.DirectionalLight( 0xffffff, 1 );
+	light.position.set( 0, 100, 10 ); //default; light shining from top
+	light.castShadow = true; // default false
+	scene.add( light );
+	
+	light.shadow.camera.near = 0.1;
+	light.shadow.camera.far = 500;
+	light.shadow.camera.right = 17;
+	light.shadow.camera.left = - 17;
+	light.shadow.camera.top	= 17;
+	light.shadow.camera.bottom = - 17;
+	light.shadow.mapSize.width = 512;
+	light.shadow.mapSize.height = 512;
+	//Create a plane that receives shadows (but does not cast them)
+	const planeGeometry = new THREE.PlaneGeometry( 2000, 2000, 32, 32 );
+	const planeMaterial = new THREE.ShadowMaterial( { color: 0x000000,opacity:1 } )
+	const plane = new THREE.Mesh( planeGeometry, planeMaterial );
+	plane.receiveShadow = true;
+	scene.add( plane );
+	plane.rotateX( - Math.PI / 2 );
+
+	changeEnvironment()
 
 	const dracoLoader = new DRACOLoader(); //DRACO Loader 
 	dracoLoader.setDecoderPath( 'https://www.gstatic.com/draco/v1/decoders/' );
@@ -98,38 +125,7 @@ function init() {
 				o.castShadow = true;
 			}
 		});
-	
-
 	})
-
-	function initShadows(){
-
-		const light = new THREE.DirectionalLight( 0xffffff, 1 );
-		light.position.set( 0, 100, 10 ); //default; light shining from top
-		light.castShadow = true; // default false
-		scene.add( light );
-		
-		light.shadow.camera.near = 0.1;
-		light.shadow.camera.far = 500;
-		light.shadow.camera.right = 17;
-		light.shadow.camera.left = - 17;
-		light.shadow.camera.top	= 17;
-		light.shadow.camera.bottom = - 17;
-		light.shadow.mapSize.width = 512;
-		light.shadow.mapSize.height = 512;
-		//Create a plane that receives shadows (but does not cast them)
-		const planeGeometry = new THREE.PlaneGeometry( 2000, 2000, 32, 32 );
-		const planeMaterial = new THREE.ShadowMaterial( { color: 0x000000,opacity:1 } )
-		const plane = new THREE.Mesh( planeGeometry, planeMaterial );
-		plane.receiveShadow = true;
-		scene.add( plane );
-		plane.rotateX( - Math.PI / 2 );
-	
-	}
-
-	initShadows()
-
-	changeEnvironment()
 
 	function changeHeight(){
 		skybox.height = params.height
@@ -157,6 +153,8 @@ function init() {
 			url = environments[envNames.indexOf(params.environment)].hdrjpg8k
 			console.log("Loading 8K HDR ",url)
 		}
+
+		console.log(environments[envNames.indexOf(params.environment)])
 	
 		let hdrJpg = new HDRJPGLoader(renderer).load( url, function ( ) {
 
@@ -168,11 +166,14 @@ function init() {
 			scene.background = new THREE.Color(0x00000)
 			scene.environment = hdrj
 			
-			skybox = new GroundedSkybox( hdrj, 15, 100 );
+			skybox = new GroundedSkybox( hdrj, parseFloat(environments[envNames.indexOf(params.environment)].height), parseFloat(environments[envNames.indexOf(params.environment)].radius));
 			scene.add( skybox );
 			skybox.receiveShadow = true
 			skybox.scale.setScalar(100)
-
+			
+			params.height = environments[envNames.indexOf(params.environment)].height
+			params.radius = environments[envNames.indexOf(params.environment)].radius
+			
 		});
 	}
 
@@ -180,8 +181,12 @@ function init() {
 		camera.fov = parseInt(params.fov)
 		camera.updateProjectionMatrix()
 	}
-	
 
+	function changeShadow(){
+		plane.material.opacity = params.shadowIntensity
+		plane.material.needsUpdate = true
+	}
+	
 }
 
 function onWindowResize() {

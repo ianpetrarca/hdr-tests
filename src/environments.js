@@ -56,7 +56,8 @@ export let environments = {
     },
     4:{
         name: "Beach Day",
-
+        height: 55,
+        radius: 400,
         category:"World",
 
         hdrjpg2k:"https://foveate3dn.nyc3.cdn.digitaloceanspaces.com/foveate_site_prod_assets/hdrs/beachday_cgib_TOR_061912_HDR_07_11529106_RAY-RES_2K.jpg",
@@ -96,17 +97,13 @@ export let environments = {
     },
     7:{
         name: "Canyon Day",
-
+        height:32,
+        radius:115,
         category:"World",
-
         hdrjpg2k:"https://foveate3dn.nyc3.cdn.digitaloceanspaces.com/foveate_site_prod_assets/hdrs/canyonday_cgib_ASH_059296_HDR_02_11422616_RAY-RES_2K.jpg",
-
         hdrjpg4k:"https://foveate3dn.nyc3.cdn.digitaloceanspaces.com/foveate_site_prod_assets/hdrs/canyonday_cgib_ASH_059296_HDR_02_11422616_RAY-RES_4K.jpg",
-
         hdrjpg8k:"https://foveate3dn.nyc3.cdn.digitaloceanspaces.com/foveate_site_prod_assets/hdrs/canyonday_cgib_ASH_059296_HDR_02_11422616_RAY-RES_8K.jpg",
-
         thumbnail:"https://foveate3dn.nyc3.cdn.digitaloceanspaces.com/foveate_site_prod_assets/hdrs/canyonday_cgib_ASH_059296_HDR_02_11422616-RES_8K_thumbnail.webp",
-       
     },
     8:{
         name: "Desert Dusk",
