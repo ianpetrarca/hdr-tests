@@ -44,6 +44,7 @@
     "vite-plugin-compress": "^2.1.0",
     "vite-plugin-head": "^1.0.2",
     "vite-plugin-minify": "^1.4.2",
-    "vite-plugin-obfuscator": "^1.0.5"
+    "vite-plugin-obfuscator": "^1.0.5",
+    "@monogrid/gainmap-js": "^3.0.5"
   }
 }

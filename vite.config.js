@@ -1,6 +1,5 @@
 
 import { resolve } from 'path'
-import minify from 'vite-plugin-minify'
 
 const root = resolve(__dirname, 'src')
 const outDir = resolve(__dirname, 'dist')

@@ -1,367 +1,225 @@
-import {
-	Clock,
-	Color,
-	Matrix4,
-	Mesh,
-	RepeatWrapping,
-	ShaderMaterial,
-	TextureLoader,
-	UniformsLib,
-	UniformsUtils,
-	Vector2,
-	Vector4
-} from 'three';
-import { Reflector } from 'three/addons/objects/Reflector.js';
-import { Refractor } from 'three/addons/objects/Refractor.js';
+import { Mesh, IcosahedronGeometry, ShaderMaterial, DoubleSide } from 'three';
 
-class Water extends Mesh {
+/**
+ * Ground projected env map adapted from @react-three/drei.
+ * https://github.com/pmndrs/drei/blob/master/src/core/Environment.tsx
+ */
+export class GroundedSkybox extends Mesh {
 
-	constructor( geometry, options = {} ) {
+	constructor( texture, h,r, options ) {
 
-		super( geometry );
+		const isCubeMap = texture.isCubeTexture;
+		const w =
+			( isCubeMap ? texture.image[ 0 ]?.width : texture.image.width ) ?? 1024;
+		const cubeSize = w / 4;
+		const _lodMax = Math.floor( Math.log2( cubeSize ) );
+		const _cubeSize = Math.pow( 2, _lodMax );
+		const width = 3 * Math.max( _cubeSize, 16 * 7 );
+		const height = 4 * _cubeSize;
 
-		this.isWater = true;
+		const defines = [
+			isCubeMap ? '#define ENVMAP_TYPE_CUBE' : '',
+			`#define CUBEUV_TEXEL_WIDTH ${1.0 / width}`,
+			`#define CUBEUV_TEXEL_HEIGHT ${1.0 / height}`,
+			`#define CUBEUV_MAX_MIP ${_lodMax}.0`,
+		];
 
-		this.type = 'Water';
+		const vertexShader = /* glsl */ `
+        varying vec3 vWorldPosition;
 
-		const scope = this;
+        void main() 
+        {
 
-		const color = ( options.color !== undefined ) ? new Color( options.color ) : new Color( 0xFFFFFF );
-		const textureWidth = options.textureWidth || 512;
-		const textureHeight = options.textureHeight || 512;
-		const clipBias = options.clipBias || 0;
-		const flowDirection = options.flowDirection || new Vector2( 1, 0 );
-		const flowSpeed = options.flowSpeed || 0.03;
-		const reflectivity = options.reflectivity || 0.02;
-		const normalAmount = options.normalAmount || 0.5;
-		const scale = options.scale || 0.0;
-		const shader = options.shader || Water.WaterShader;
+            vec4 worldPosition = ( modelMatrix * vec4( position, 1.0 ) );
+            vWorldPosition = worldPosition.xyz;
+            
+            gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
 
-		const textureLoader = new TextureLoader();
+        }
+        `;
+		const fragmentShader = defines.join( '\n' ) + /* glsl */ `
+        #define ENVMAP_TYPE_CUBE_UV
 
-		const flowMap = options.flowMap || undefined;
-		const normalMap0 = options.normalMap0 || textureLoader.load( 'https://threejs.org/examples/textures/water/Water_1_M_Normal.jpg' );
-		const normalMap1 = options.normalMap1 || textureLoader.load( 'https://threejs.org/examples/textures/water/Water_2_M_Normal.jpg' );
+        varying vec3 vWorldPosition;
 
-		const cycle = 0.15; // a cycle of a flow map phase
-		const halfCycle = cycle * 0.5;
-		const textureMatrix = new Matrix4();
-		const clock = new Clock();
+        uniform float radius;
+        uniform float height;
+        uniform float angle;
 
-		// internal components
+        #ifdef ENVMAP_TYPE_CUBE
 
-		if ( Reflector === undefined ) {
+            uniform samplerCube map;
 
-			console.error( 'THREE.Water: Required component Reflector not found.' );
-			return;
+        #else
 
-		}
+            uniform sampler2D map;
 
-		if ( Refractor === undefined ) {
+        #endif
 
-			console.error( 'THREE.Water: Required component Refractor not found.' );
-			return;
+        // From: https://www.shadertoy.com/view/4tsBD7
+        float diskIntersectWithBackFaceCulling( vec3 ro, vec3 rd, vec3 c, vec3 n, float r ) 
+        {
 
-		}
+            float d = dot ( rd, n );
+            
+            if( d > 0.0 ) { return 1e6; }
+            
+            vec3  o = ro - c;
+            float t = - dot( n, o ) / d;
+            vec3  q = o + rd * t;
+            
+            return ( dot( q, q ) < r * r ) ? t : 1e6;
 
-		const reflector = new Reflector( geometry, {
-			textureWidth: textureWidth,
-			textureHeight: textureHeight,
-			clipBias: clipBias
-		} );
+        }
 
-		const refractor = new Refractor( geometry, {
-			textureWidth: textureWidth,
-			textureHeight: textureHeight,
-			clipBias: clipBias
-		} );
+        // From: https://www.iquilezles.org/www/articles/intersectors/intersectors.htm
+        float sphereIntersect( vec3 ro, vec3 rd, vec3 ce, float ra ) 
+        {
 
-		reflector.matrixAutoUpdate = false;
-		refractor.matrixAutoUpdate = false;
+            vec3 oc = ro - ce;
+            float b = dot( oc, rd );
+            float c = dot( oc, oc ) - ra * ra;
+            float h = b * b - c;
+            
+            if( h < 0.0 ) { return -1.0; }
+            
+            h = sqrt( h );
+            
+            return - b + h;
 
-		// material
+        }
 
-		this.material = new ShaderMaterial( {
-			uniforms: UniformsUtils.merge( [
-				UniformsLib[ 'fog' ],
-				shader.uniforms
-			] ),
-			vertexShader: shader.vertexShader,
-			fragmentShader: shader.fragmentShader,
-			transparent: true,
-			fog: true
-		} );
+        
+        // From: https://gist.github.com/yiwenl/3f804e80d0930e34a0b33359259b556c
+        mat4 rotationMatrix( vec3 axis, float angle ) 
+        {
+            
+            axis = normalize( axis );
+            float s = sin( angle );
+            float c = cos( angle );
+            float oc = 1.0 - c;
+            
+            return mat4(oc * axis.x * axis.x + c,           oc * axis.x * axis.y - axis.z * s,  oc * axis.z * axis.x + axis.y * s,  0.0,
+                        oc * axis.x * axis.y + axis.z * s,  oc * axis.y * axis.y + c,           oc * axis.y * axis.z - axis.x * s,  0.0,
+                        oc * axis.z * axis.x - axis.y * s,  oc * axis.y * axis.z + axis.x * s,  oc * axis.z * axis.z + c,           0.0,
+                        0.0,                                0.0,                                0.0,                                1.0);
+        
+        }
 
-		if ( flowMap !== undefined ) {
+        // From: https://gist.github.com/yiwenl/3f804e80d0930e34a0b33359259b556c
+        vec3 rotate( vec3 v, vec3 axis, float angle ) 
+        {
+            
+            mat4 m = rotationMatrix( axis, angle );
+            return ( m * vec4( v, 1.0 ) ).xyz;
 
-			this.material.defines.USE_FLOWMAP = '';
-			this.material.uniforms[ 'tFlowMap' ] = {
-				type: 't',
-				value: flowMap
-			};
+        }
+        
+        vec3 project() 
+        {
 
-		} else {
+            vec3 p = normalize( vWorldPosition );
+            vec3 camPos = cameraPosition;
+            camPos.y -= height;
 
-			this.material.uniforms[ 'flowDirection' ] = {
-				type: 'v2',
-				value: flowDirection
-			};
+            float intersection = sphereIntersect( camPos, p, vec3( 0.0 ), radius );
+            if( intersection > 0.0 ) {
+                
+                vec3 h = vec3( 0.0, - height, 0.0 );
+                float intersection2 = diskIntersectWithBackFaceCulling( camPos, p, h, vec3( 0.0, 1.0, 0.0 ), radius );
+                p = ( camPos + min( intersection, intersection2 ) * p ) / radius;
 
-		}
+            } else {
 
-		// maps
+                p = vec3( 0.0, 1.0, 0.0 );
 
-		normalMap0.wrapS = normalMap0.wrapT = RepeatWrapping;
-		normalMap1.wrapS = normalMap1.wrapT = RepeatWrapping;
+            }
+            
+            p = rotate(p, vec3(0.0, 1.0, 0.0), angle);
 
-		this.material.uniforms[ 'tReflectionMap' ].value = reflector.getRenderTarget().texture;
-		this.material.uniforms[ 'tRefractionMap' ].value = refractor.getRenderTarget().texture;
-		this.material.uniforms[ 'tNormalMap0' ].value = normalMap0;
-		this.material.uniforms[ 'tNormalMap1' ].value = normalMap1;
-		this.material.uniforms[ 'normalAmount' ].value = normalAmount;
-		// water
+            return p;
 
-		this.material.uniforms[ 'color' ].value = color;
-		this.material.uniforms[ 'reflectivity' ].value = reflectivity;
-		this.material.uniforms[ 'textureMatrix' ].value = textureMatrix;
+        }
 
-		// inital values
+        #include <common>
+        #include <cube_uv_reflection_fragment>
 
-		this.material.uniforms[ 'config' ].value.x = 0; // flowMapOffset0
-		this.material.uniforms[ 'config' ].value.y = halfCycle; // flowMapOffset1
-		this.material.uniforms[ 'config' ].value.z = halfCycle; // halfCycle
-		this.material.uniforms[ 'config' ].value.w = scale; // scale
-		this.material.uniforms[ 'speedAmt' ].value = 0.0; // scale
+        void main() 
+        {
 
-		// functions
+            vec3 projectedWorldPosition = project();
+            
+            #ifdef ENVMAP_TYPE_CUBE
 
-		function updateTextureMatrix( camera ) {
+                vec3 outcolor = textureCube( map, projectedWorldPosition ).rgb;
 
-			textureMatrix.set(
-				0.5, 0.0, 0.0, 0.5,
-				0.0, 0.5, 0.0, 0.5,
-				0.0, 0.0, 0.5, 0.5,
-				0.0, 0.0, 0.0, 1.0
-			);
+            #else
 
-			textureMatrix.multiply( camera.projectionMatrix );
-			textureMatrix.multiply( camera.matrixWorldInverse );
-			textureMatrix.multiply( scope.matrixWorld );
+                vec3 direction = normalize( projectedWorldPosition );
+                vec2 uv = equirectUv( direction );
+                vec3 outcolor = texture2D( map, uv ).rgb;
 
-		}
+            #endif
 
-		function updateFlow() {
+            gl_FragColor = vec4( outcolor, 1.0 );
+            #include <tonemapping_fragment>
 
-			const delta = clock.getDelta();
-			const config = scope.material.uniforms[ 'config' ];
-			const s = scope.material.uniforms[ 'speedAmt' ].value;
+        }
+        `;
 
-			config.value.x += s * delta; // flowMapOffset0
-			config.value.y = config.value.x + halfCycle; // flowMapOffset1
-
-			// Important: The distance between offsets should be always the value of "halfCycle".
-			// Moreover, both offsets should be in the range of [ 0, cycle ].
-			// This approach ensures a smooth water flow and avoids "reset" effects.
-
-			if ( config.value.x >= cycle ) {
-
-				config.value.x = 0;
-				config.value.y = halfCycle;
-
-			} else if ( config.value.y >= cycle ) {
-
-				config.value.y = config.value.y - cycle;
-
-			}
-
-		}
-
-		//
-
-		this.onBeforeRender = function ( renderer, scene, camera ) {
-
-			updateTextureMatrix( camera );
-			updateFlow();
-
-			scope.visible = false;
-
-			reflector.matrixWorld.copy( scope.matrixWorld );
-			refractor.matrixWorld.copy( scope.matrixWorld );
-
-			reflector.onBeforeRender( renderer, scene, camera );
-			refractor.onBeforeRender( renderer, scene, camera );
-
-			scope.visible = true;
-
+		const uniforms = {
+			map: { value: texture },
+			height: { value: h || 15 },
+			radius: { value: r || 100 },
+			angle: { value: options?.angle || 0 },
 		};
+
+		const geometry = new IcosahedronGeometry( 1, 16 );
+		const material = new ShaderMaterial( {
+			uniforms,
+			fragmentShader,
+			vertexShader,
+			side: DoubleSide,
+		} );
+
+		super( geometry, material );
+
+	}
+
+	set radius( radius ) {
+
+		this.material.uniforms.radius.value = radius;
+
+	}
+
+	get radius() {
+
+		return this.material.uniforms.radius.value;
+
+	}
+
+	set height( height ) {
+
+		this.material.uniforms.height.value = height;
+
+	}
+
+	get height() {
+
+		return this.material.uniforms.height.value;
+
+	}
+	
+    set angle( angle ) {
+
+		this.material.uniforms.angle.value = angle;
+
+	}
+
+	get angle() {
+
+		return this.material.uniforms.angle.value;
 
 	}
 
 }
-
-Water.WaterShader = {
-
-	uniforms: {
-
-		'color': {
-			type: 'c',
-			value: null
-		},
-
-		'normalAmount': {
-			type: 'f',
-			value: 0
-		},
-
-		'speedAmt': {
-			type: 'f',
-			value: 0
-		},
-
-		'reflectivity': {
-			type: 'f',
-			value: 0
-		},
-
-		'tReflectionMap': {
-			type: 't',
-			value: null
-		},
-
-		'tRefractionMap': {
-			type: 't',
-			value: null
-		},
-
-		'tNormalMap0': {
-			type: 't',
-			value: null
-		},
-
-		'tNormalMap1': {
-			type: 't',
-			value: null
-		},
-
-		'textureMatrix': {
-			type: 'm4',
-			value: null
-		},
-
-		'config': {
-			type: 'v4',
-			value: new Vector4()
-		}
-
-	},
-
-	vertexShader: /* glsl */`
-
-		#include <common>
-		#include <fog_pars_vertex>
-		#include <logdepthbuf_pars_vertex>
-
-		uniform mat4 textureMatrix;
-
-		varying vec4 vCoord;
-		varying vec2 vUv;
-		varying vec3 vToEye;
-
-		void main() {
-
-			vUv = uv;
-			vCoord = textureMatrix * vec4( position, 1.0 );
-
-			vec4 worldPosition = modelMatrix * vec4( position, 1.0 );
-			vToEye = cameraPosition - worldPosition.xyz;
-
-			vec4 mvPosition =  viewMatrix * worldPosition; // used in fog_vertex
-			gl_Position = projectionMatrix * mvPosition;
-
-			#include <logdepthbuf_vertex>
-			#include <fog_vertex>
-
-		}`,
-
-	fragmentShader: /* glsl */`
-
-		#include <common>
-		#include <fog_pars_fragment>
-		#include <logdepthbuf_pars_fragment>
-
-		uniform sampler2D tReflectionMap;
-		uniform sampler2D tRefractionMap;
-		uniform float normalAmount;
-		uniform sampler2D tNormalMap0;
-		uniform sampler2D tNormalMap1;
-
-		#ifdef USE_FLOWMAP
-			uniform sampler2D tFlowMap;
-		#else
-			uniform vec2 flowDirection;
-		#endif
-
-		uniform vec3 color;
-		uniform float reflectivity;
-		uniform float speedAmt;
-		uniform vec4 config;
-
-		varying vec4 vCoord;
-		varying vec2 vUv;
-		varying vec3 vToEye;
-
-		void main() {
-
-			#include <logdepthbuf_fragment>
-
-			float flowMapOffset0 = config.x;
-			float flowMapOffset1 = config.y;
-			float halfCycle = config.z;
-			float scale = config.w;
-			float speed = speedAmt;
-
-			vec3 toEye = normalize( vToEye );
-
-			// determine flow direction
-			vec2 flow;
-			#ifdef USE_FLOWMAP
-				flow = texture2D( tFlowMap, vUv ).rg * 2.0 - 1.0;
-			#else
-				flow = flowDirection;
-			#endif
-			flow.x *= - 1.0;
-
-			// sample normal maps (distort uvs with flowdata)
-			vec4 normalColor0 = texture2D( tNormalMap0, ( vUv * scale ) + flow * flowMapOffset0 );
-			vec4 normalColor1 = texture2D( tNormalMap1, ( vUv * scale ) + flow * flowMapOffset1 );
-
-			// linear interpolate to get the final normal color
-			float flowLerp = abs( halfCycle - flowMapOffset0 ) / halfCycle;
-			vec4 normalColor = mix( normalColor0, normalColor1, flowLerp );
-
-			// calculate normal vector
-			vec3 normal = normalize( vec3( normalColor.r * 2.0 - 1.0, normalColor.b,  normalColor.g * 2.0 - 1.0 ) ) ;
-
-			// calculate the fresnel term to blend reflection and refraction maps
-			float theta = max( dot( toEye, normal ), 0.0 );
-			float reflectance = reflectivity + ( 1.0 - reflectivity ) * pow( ( 1.0 - theta ), 10.0 );
-
-			// calculate final uv coords
-			vec3 coord = vCoord.xyz / vCoord.w;
-			vec2 uv = coord.xy + coord.z * normal.xz * 0.0;
-
-			vec4 reflectColor = texture2D( tReflectionMap, vec2( 1.0 - uv.x, uv.y ) );
-			vec4 refractColor = texture2D( tRefractionMap, uv );
-
-			// multiply water color with the mix of both textures
-			gl_FragColor = vec4( color, 1.0 ) * mix( refractColor, reflectColor, reflectance );
-
-			#include <tonemapping_fragment>
-			#include <colorspace_fragment>
-			#include <fog_fragment>
-
-		}`
-
-};
-
-export { Water };
