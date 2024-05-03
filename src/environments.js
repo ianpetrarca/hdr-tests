@@ -97,7 +97,7 @@ export let environments = {
     },
     7:{
         name: "Canyon Day",
-        height:32,
+        height:22,
         radius:115,
         category:"World",
         hdrjpg2k:"https://foveate3dn.nyc3.cdn.digitaloceanspaces.com/foveate_site_prod_assets/hdrs/canyonday_cgib_ASH_059296_HDR_02_11422616_RAY-RES_2K.jpg",
