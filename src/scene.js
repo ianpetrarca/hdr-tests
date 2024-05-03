@@ -9,34 +9,29 @@ import {GroundedSkybox} from './ground.js'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 
-
-const SHADOW_MAP_WIDTH = 2048, SHADOW_MAP_HEIGHT = 1024;
-
-const state = {
-	shadow: {
-		blur: 3.5,
-		darkness: 1,
-		opacity: 1,
-	},
-	plane: {
-		color: '#ffffff',
-		opacity: 1,
-	},
-	showWireframe: false,
-};
-
-let shadowGroup, renderTarget, renderTargetBlur, shadowCamera, cameraHelper, depthMaterial, horizontalBlurMaterial, verticalBlurMaterial;
-
-let plane, blurPlane, fillPlane;
-
 function extractNames(obj) {
 	return Object.values(obj).map(item => item.name);
 }
+
+const toneMappingOptions = {
+	None: THREE.NoToneMapping,
+	Linear: THREE.LinearToneMapping,
+	Reinhard: THREE.ReinhardToneMapping,
+	Cineon: THREE.CineonToneMapping,
+	ACESFilmic: THREE.ACESFilmicToneMapping,
+	AgX: THREE.AgXToneMapping,
+	Neutral: THREE.NeutralToneMapping,
+	Custom: THREE.CustomToneMapping
+};
+
+console.log(Object.keys( toneMappingOptions )[5])
+
 
 let selectedEnvironment = 7
 
 let envNames = extractNames(environments);
 let params = {
+	toneMapping: Object.keys( toneMappingOptions )[4],
 	environment: envNames[selectedEnvironment],
 	resolution:'4k',
 	blur:0,
@@ -66,6 +61,8 @@ function init() {
 	scene = new THREE.Scene();
 	renderer = new THREE.WebGLRenderer();
 	renderer.toneMapping = THREE.ACESFilmicToneMapping;
+	renderer.toneMappingExposure = params.exposure
+
 	renderer.shadowMap.enabled = true;
 	renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
 	
@@ -81,6 +78,12 @@ function init() {
 	window.addEventListener( 'resize', onWindowResize );
 
 	const gui = new GUI();
+	gui.add( params, 'toneMapping', Object.keys( toneMappingOptions ) ).onChange( function () {
+		renderer.toneMapping = toneMappingOptions[ params.toneMapping ];
+		console.log(params.toneMapping)
+
+	} );
+
 	gui.add( params, 'environment', envNames  ).onChange( changeEnvironment ).listen();
 	gui.add( params, 'exposure', 0, 10, 0.01 ).onChange( changeExposure ).listen();
 	gui.add( params, 'resolution', [ '2k','4k', '8k' ] ).onChange( changeEnvironment ).listen();
@@ -88,6 +91,7 @@ function init() {
 	gui.add( params, 'radius', 0, 1000, 0.01 ).onChange( changeRadius ).listen();
 	gui.add( params, 'fov', 1, 100, 0.01 ).onChange( changeFOV ).listen();
 	gui.add( params, 'shadowIntensity', .01, 1, 0.01 ).onChange( changeShadow ).listen();
+
 	gui.open();
 
 	const light = new THREE.DirectionalLight( 0xffffff, 1 );
