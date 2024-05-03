@@ -9,9 +9,6 @@ import {GroundedSkybox} from './ground.js'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 
-import { HorizontalBlurShader } from 'three/addons/shaders/HorizontalBlurShader.js';
-import { VerticalBlurShader } from 'three/addons/shaders/VerticalBlurShader.js';
-
 
 const meshes = [];
 
