@@ -62,23 +62,9 @@ function init() {
 	scene = new THREE.Scene();
 	renderer = new THREE.WebGLRenderer();
 	renderer.toneMapping = THREE.ACESFilmicToneMapping;
-
-
-	let light = new THREE.DirectionalLight( 0xffffff, 3 );
-	light.position.set( 0, 1500, 1000 );
-	light.castShadow = true;
-	light.shadow.camera.top = 2000;
-	light.shadow.camera.bottom = - 2000;
-	light.shadow.camera.left = - 2000;
-	light.shadow.camera.right = 2000;
-	light.shadow.camera.near = 1200;
-	light.shadow.camera.far = 2500;
-	light.shadow.bias = 0.0001;
-
-	light.shadow.mapSize.width = SHADOW_MAP_WIDTH;
-	light.shadow.mapSize.height = SHADOW_MAP_HEIGHT;
-
-	scene.add( light );
+	renderer.shadowMap.enabled = true;
+	renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
+	
 
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( window.innerWidth, window.innerHeight );
@@ -107,28 +93,38 @@ function init() {
 	loader.load( '/moto1.glb' , async function ( gltf ) {	
 		scene.add(gltf.scene)	
 		gltf.scene.scale.set(10,10,10)
-		
+		gltf.scene.traverse((o) => {
+			if (o.isMesh){
+				o.castShadow = true;
+			}
+		});
 	
 
 	})
 
 	function initShadows(){
-		 // floor
-		 const geometry = new THREE.PlaneGeometry( 2000, 2000 );
-		 geometry.rotateX( - Math.PI / 2 );
-		 
-		 const material = new THREE.ShadowMaterial();
-		 material.opacity = 1;
-		 
-		 const plane = new THREE.Mesh( geometry, material );
-		 plane.position.y = 0;
-		 plane.receiveShadow = true;
-		 scene.add( plane );
 
-		 scene.add( new THREE.AmbientLight( 0x444444 ) );
-
-
-
+		const light = new THREE.DirectionalLight( 0xffffff, 1 );
+		light.position.set( 0, 100, 10 ); //default; light shining from top
+		light.castShadow = true; // default false
+		scene.add( light );
+		
+		light.shadow.camera.near = 0.1;
+		light.shadow.camera.far = 500;
+		light.shadow.camera.right = 17;
+		light.shadow.camera.left = - 17;
+		light.shadow.camera.top	= 17;
+		light.shadow.camera.bottom = - 17;
+		light.shadow.mapSize.width = 512;
+		light.shadow.mapSize.height = 512;
+		//Create a plane that receives shadows (but does not cast them)
+		const planeGeometry = new THREE.PlaneGeometry( 2000, 2000, 32, 32 );
+		const planeMaterial = new THREE.ShadowMaterial( { color: 0x000000 } )
+		const plane = new THREE.Mesh( planeGeometry, planeMaterial );
+		plane.receiveShadow = true;
+		scene.add( plane );
+		plane.rotateX( - Math.PI / 2 );
+	
 	}
 
 	initShadows()
@@ -174,6 +170,7 @@ function init() {
 			
 			skybox = new GroundedSkybox( hdrj, 15, 100 );
 			scene.add( skybox );
+			skybox.receiveShadow = true
 			skybox.scale.setScalar(100)
 
 		});
