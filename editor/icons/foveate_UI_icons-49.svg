@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg id="Icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-  <ellipse cx="11.73" cy="12.9" rx="5.01" ry="7.32" transform="translate(-5.69 12.07) rotate(-45)" style="fill: none; stroke: #000; stroke-miterlimit: 10;"/>
-  <ellipse cx="12.14" cy="12.49" rx="2.45" ry="3.58" transform="translate(-5.28 12.24) rotate(-45)" style="fill: none; stroke: #000; stroke-miterlimit: 10;"/>
-  <line x1="12.14" y1="12.49" x2="18.54" y2="6.1" style="fill: none; stroke: #000; stroke-linecap: round; stroke-miterlimit: 10;"/>
-</svg>

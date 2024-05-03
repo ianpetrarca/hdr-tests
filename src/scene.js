@@ -119,7 +119,7 @@ function init() {
 		light.shadow.mapSize.height = 512;
 		//Create a plane that receives shadows (but does not cast them)
 		const planeGeometry = new THREE.PlaneGeometry( 2000, 2000, 32, 32 );
-		const planeMaterial = new THREE.ShadowMaterial( { color: 0x000000 } )
+		const planeMaterial = new THREE.ShadowMaterial( { color: 0x000000,opacity:1 } )
 		const plane = new THREE.Mesh( planeGeometry, planeMaterial );
 		plane.receiveShadow = true;
 		scene.add( plane );
@@ -180,6 +180,7 @@ function init() {
 		camera.fov = parseInt(params.fov)
 		camera.updateProjectionMatrix()
 	}
+	
 
 }
 
