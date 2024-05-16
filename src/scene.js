@@ -123,7 +123,7 @@ function init() {
 	loader.setDRACOLoader( dracoLoader );
 	loader.load( '/moto1.glb' , async function ( gltf ) {	
 		scene.add(gltf.scene)	
-		gltf.scene.scale.set(10,10,10)
+	
 		gltf.scene.traverse((o) => {
 			if (o.isMesh){
 				o.castShadow = true;
