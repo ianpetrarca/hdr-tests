@@ -40,12 +40,16 @@ let params = {
 	height: environments[selectedEnvironment].height,
 	radius: environments[selectedEnvironment].radius,
 	shadowIntensity: 1,
+	lightPositionX: environments[selectedEnvironment].light.x,
+	lightPositionY: environments[selectedEnvironment].light.y,
+	lightPositionZ: environments[selectedEnvironment].light.z,
+	
 };
 
 
 let container, stats;
 let camera, scene, renderer, controls;
-let hdrj, skybox, loader
+let hdrj, skybox, loader, helper
 
 init();
 animate();
@@ -91,13 +95,19 @@ function init() {
 	gui.add( params, 'radius', 0, 1000, 0.01 ).onChange( changeRadius ).listen();
 	gui.add( params, 'fov', 1, 100, 0.01 ).onChange( changeFOV ).listen();
 	gui.add( params, 'shadowIntensity', .01, 1, 0.01 ).onChange( changeShadow ).listen();
+	gui.add( params, 'lightPositionX', -1000, 1000, 0.01 ).onChange( changeLight ).listen();
+	gui.add( params, 'lightPositionY', 0, 1000, 0.01 ).onChange( changeLight ).listen();
+	gui.add( params, 'lightPositionZ', -1000, 1000, 0.01 ).onChange( changeLight ).listen();
 
 	gui.open();
 
 	const light = new THREE.DirectionalLight( 0xffffff, 1 );
-	light.position.set( 0, 100, 10 ); //default; light shining from top
+	light.position.set( params.lightPositionX, params.lightPositionY, params.lightPositionZ ); //default; light shining from top
 	light.castShadow = true; // default false
 	scene.add( light );
+
+	helper = new THREE.CameraHelper( light.shadow.camera );
+	scene.add( helper );
 	
 	light.shadow.camera.near = 0.1;
 	light.shadow.camera.far = 500;
@@ -130,6 +140,10 @@ function init() {
 			}
 		});
 	})
+
+	function changeLight(){
+		light.position.set( params.lightPositionX, params.lightPositionY,params.lightPositionZ ); //default; light shining from top;
+	}
 
 	function changeHeight(){
 		skybox.height = params.height
