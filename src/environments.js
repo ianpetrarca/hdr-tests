@@ -3,9 +3,9 @@ export let environments = {
         name: "Overcast Sky",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 41.29,
+            y: 434.61,
+            z: 90.46
         },
 
          shadowIntensity:.1,
@@ -29,9 +29,9 @@ export let environments = {
         name: "Airfield Day",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 311.7,
+            y: 29,
+            z: -7.87
         },
 
          shadowIntensity:.1,
@@ -56,9 +56,9 @@ export let environments = {
         name: "Architecture Night",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 90.46,
+            y:94.58,
+            z: 5.71
         },
 
          shadowIntensity:.5,
@@ -83,12 +83,12 @@ export let environments = {
         name: "Bay Day",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 360.86,
+            y: 53.58,
+            z: 16.71
         },
 
-         shadowIntensity:.5,
+         shadowIntensity:.1,
         shadowRadius: 5,
 
         
@@ -110,9 +110,9 @@ export let environments = {
         name: "Beach Day",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 237.95,
+            y: 122.87,
+            z: 0.96
         },
 
          shadowIntensity:.5,
@@ -135,9 +135,9 @@ export let environments = {
         name: "Courtyard Day",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 31,
+            y: 38,
+            z: 1
         },
 
          shadowIntensity:.5,
@@ -161,9 +161,9 @@ export let environments = {
         name: "City Night",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 7.71,
+            y: 180,
+            z: 0
         },
 
          shadowIntensity:.5,
@@ -210,12 +210,12 @@ export let environments = {
         name: "Desert Dusk",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: -110.2,
+            y: 38,
+            z: 434.61
         },
 
-         shadowIntensity:.5,
+         shadowIntensity:.1,
         shadowRadius: 5,
 
         
@@ -237,12 +237,12 @@ export let environments = {
         name: "Forest Day",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 0,
+            y: 100,
+            z: 0
         },
 
-         shadowIntensity:.5,
+         shadowIntensity:.75,
         shadowRadius: 5,
 
         
@@ -264,9 +264,9 @@ export let environments = {
         name: "Loft Day",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 64,
+            y: 43,
+            z: -2
         },
 
          shadowIntensity:.5,
@@ -274,8 +274,8 @@ export let environments = {
 
         
         
-        height: 0.10,
-        radius: 1000,
+        height: 2.36,
+        radius: 3.71,
         category:"Box",
 
         hdrjpg2k:"https://foveate3dn.nyc3.cdn.digitaloceanspaces.com/foveate_site_prod_assets/hdrs/loftday_cgib_PAR_055726_HDR_01_11282519_RAY-RES_2K.jpg",
@@ -292,11 +292,11 @@ export let environments = {
         
         light:{
             x: 41,
-            y: 65,
-            z: -7
+            y: 29,
+            z: 140
         },
 
-         shadowIntensity:.5,
+         shadowIntensity:.1,
         shadowRadius: 5,
 
         
@@ -318,12 +318,12 @@ export let environments = {
         name: "Garage Day",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 0,
+            y: 100,
+            z: 0
         },
 
-         shadowIntensity:.5,
+         shadowIntensity:.45,
         shadowRadius: 5,
 
         
@@ -344,12 +344,12 @@ export let environments = {
         name: "Pools Day",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 90.46,
+            y: 54,
+            z: 0
         },
 
-         shadowIntensity:.5,
+         shadowIntensity:.25,
         shadowRadius: 5,
 
         
@@ -371,9 +371,9 @@ export let environments = {
         name: "Architecture Dusk",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 39,
+            y: 2,
+            z: 2
         },
 
          shadowIntensity:.5,
@@ -398,9 +398,9 @@ export let environments = {
         name: "Winter Day",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 65,
+            y: 180,
+            z: 0
         },
 
          shadowIntensity:.5,
@@ -426,12 +426,12 @@ export let environments = {
         name: "Tunnel Bright",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 12,
+            y: 50,
+            z: 0
         },
 
-         shadowIntensity:.5,
+         shadowIntensity:.75,
         shadowRadius: 5,
 
         
@@ -453,12 +453,12 @@ export let environments = {
         name: "Factory Dark",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 0,
+            y: 50,
+            z: 0
         },
 
-         shadowIntensity:.5,
+         shadowIntensity: .9,
         shadowRadius: 5,
 
         
@@ -481,12 +481,12 @@ export let environments = {
         name: "Sky Bright",
         
         light:{
-            x: 41,
+            x: 50.46,
             y: 65,
-            z: -7
+            z: 35
         },
 
-         shadowIntensity:.5,
+         shadowIntensity:.25,
         shadowRadius: 5,
 
         
@@ -509,9 +509,9 @@ export let environments = {
         name: "Architecture Colorful",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 0,
+            y: 100,
+            z: 0
         },
 
          shadowIntensity:.5,
@@ -537,12 +537,12 @@ export let environments = {
         name: "Architecture Rainy",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 0,
+            y: 100,
+            z: 0
         },
 
-         shadowIntensity:.5,
+         shadowIntensity:.8,
         shadowRadius: 5,
 
         
@@ -565,9 +565,9 @@ export let environments = {
         name: "Tokyo Night",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 0,
+            y: 100,
+            z: 0
         },
 
          shadowIntensity:.5,
@@ -593,9 +593,9 @@ export let environments = {
         name: "Greathall Bright",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 0,
+            y: 100,
+            z: 0
         },
 
          shadowIntensity:.5,
@@ -621,12 +621,12 @@ export let environments = {
         name: "Interior Bright",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 0,
+            y: 100,
+            z: 0
         },
 
-         shadowIntensity:.5,
+         shadowIntensity:.45,
         shadowRadius: 5,
 
         
@@ -649,12 +649,12 @@ export let environments = {
         name: "Hangar Bright",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 0,
+            y: 100,
+            z: 0
         },
 
-         shadowIntensity:.5,
+         shadowIntensity:.7,
         shadowRadius: 5,
 
         
@@ -677,12 +677,12 @@ export let environments = {
         name: "Lobby Night",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 0,
+            y: 100,
+            z: 0
         },
 
-         shadowIntensity:.5,
+         shadowIntensity:.7,
         shadowRadius: 5,
 
         
@@ -704,12 +704,12 @@ export let environments = {
         name: "Studio Bright",
         
         light:{
-            x: 41,
+            x: 0,
             y: 65,
-            z: -7
+            z: 12
         },
 
-         shadowIntensity:.5,
+         shadowIntensity:.25,
         shadowRadius: 5,
 
         
@@ -731,12 +731,12 @@ export let environments = {
         name: "Studio Dark",
         
         light:{
-            x: 41,
+            x: 0,
             y: 65,
-            z: -7
+            z: 0
         },
 
-         shadowIntensity:.5,
+         shadowIntensity:.8,
         shadowRadius: 5,
 
         
@@ -758,12 +758,12 @@ export let environments = {
         name: "Station Afternoon",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 50,
+            y: 72,
+            z: -22
         },
 
-         shadowIntensity:.5,
+         shadowIntensity:.2,
         shadowRadius: 5,
 
         
@@ -786,12 +786,12 @@ export let environments = {
         name: "Urban Dark",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 73,
+            y: 133,
+            z: 3
         },
 
-         shadowIntensity:.5,
+         shadowIntensity:.4,
         shadowRadius: 5,
 
         
@@ -813,12 +813,12 @@ export let environments = {
         name: "Architecture Lights",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 90.46,
+            y: 243.32,
+            z: -204.53
         },
 
-         shadowIntensity:.5,
+         shadowIntensity:.25,
         shadowRadius: 5,
 
         
@@ -840,12 +840,12 @@ export let environments = {
         name: "NYC Night",
         
         light:{
-            x: 41,
+            x: 0,
             y: 65,
-            z: -7
+            z: 0
         },
 
-         shadowIntensity:.5,
+         shadowIntensity:.9,
         shadowRadius: 5,
 
         
@@ -867,12 +867,12 @@ export let environments = {
         name: "NYC Overcast",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 0,
+            y: 100,
+            z: 0
         },
 
-         shadowIntensity:.5,
+         shadowIntensity:.45,
         shadowRadius: 5,
 
         
@@ -893,12 +893,12 @@ export let environments = {
         name: "Oculus Day",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 4,
+            y: 27,
+            z: -3
         },
 
-         shadowIntensity:.5,
+         shadowIntensity:.65,
         shadowRadius: 5,
 
         
@@ -920,12 +920,12 @@ export let environments = {
         name: "Oculus Night",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 8,
+            y: 47,
+            z: -57
         },
 
-         shadowIntensity:.5,
+         shadowIntensity:.35,
         shadowRadius: 5,
 
         
@@ -947,12 +947,12 @@ export let environments = {
         name: "Paris Morning",
         
         light:{
-            x: 41,
+            x: 29,
             y: 65,
-            z: -7
+            z: 113
         },
 
-         shadowIntensity:.5,
+         shadowIntensity:.25,
         shadowRadius: 5,
 
         
@@ -974,12 +974,12 @@ export let environments = {
         name: "Paris Afternoon",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: -14.62,
+            y: 188.78,
+            z: 188.78
         },
 
-         shadowIntensity:.5,
+         shadowIntensity:.3,
         shadowRadius: 5,
 
         
@@ -1001,9 +1001,9 @@ export let environments = {
         name: "Paris Overcast",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 0,
+            y: 100,
+            z: 0
         },
 
          shadowIntensity:.5,
@@ -1028,9 +1028,9 @@ export let environments = {
         name: "Tokyo Day",
         
         light:{
-            x: 41,
+            x: 0,
             y: 65,
-            z: -7
+            z: 0
         },
 
          shadowIntensity:.5,
@@ -1054,12 +1054,12 @@ export let environments = {
         name: "Entry Warm",
         
         light:{
-            x: 41,
-            y: 65,
-            z: -7
+            x: 65.87,
+            y: 102.75,
+            z: -7.87
         },
 
-         shadowIntensity:.5,
+         shadowIntensity:.25,
         shadowRadius: 5,
 
         
@@ -1080,9 +1080,9 @@ export let environments = {
         name: "Overpass Dark",
         
         light:{
-            x: 41,
+            x: 0,
             y: 65,
-            z: -7
+            z: 0
         },
 
          shadowIntensity:.5,
@@ -1106,9 +1106,9 @@ export let environments = {
         name: "Iceland Morning",
         
         light:{
-            x: 41,
+            x: 4,
             y: 65,
-            z: -7
+            z: -70
         },
 
          shadowIntensity:.5,
@@ -1133,9 +1133,9 @@ export let environments = {
         name: "Substance Studio Tomoco",
         
         light:{
-            x: 41,
+            x: 0,
             y: 65,
-            z: -7
+            z: 0
         },
 
          shadowIntensity:.5,
@@ -1143,8 +1143,8 @@ export let environments = {
 
         
         
-        height: 0.10,
-        radius: 1000,
+        height: 1,
+        radius: 3.5,
         category:"Studio",
 
         hdrjpg2k:"https://foveate3dn.nyc3.cdn.digitaloceanspaces.com/foveate_site_prod_assets/hdrs/substance_StudioTomoco_2K.jpg",
@@ -1159,12 +1159,12 @@ export let environments = {
         name: "Substance Studio 6",
         
         light:{
-            x: 41,
+            x: 0,
             y: 65,
-            z: -7
+            z: 0
         },
 
-         shadowIntensity:.5,
+         shadowIntensity:.25,
         shadowRadius: 5,
 
         
@@ -1185,12 +1185,12 @@ export let environments = {
         name: "Modelviewer Studio Neutral",
         
         light:{
-            x: 41,
+            x: 0,
             y: 65,
-            z: -7
+            z: 0
         },
 
-         shadowIntensity:.5,
+         shadowIntensity:.4,
         shadowRadius: 5,
 
         
@@ -1212,9 +1212,9 @@ export let environments = {
         name: "Rhino Studio",
         
         light:{
-            x: 41,
+            x: 0,
             y: 65,
-            z: -7
+            z: 0
         },
 
          shadowIntensity:.5,
