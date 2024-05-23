@@ -1,6 +1,13 @@
 export let environments = {
     0:{
         name: "Overcast Sky",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 10,
         radius: 1000,
         category:"World",
@@ -15,6 +22,13 @@ export let environments = {
     },
     1:{
         name: "Airfield Day",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 0.10,
         radius: 1000,
         category:"World",
@@ -30,6 +44,13 @@ export let environments = {
     },
     2:{
         name: "Architecture Night",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 1.5,
         radius: 13.71,
         category:"World",
@@ -45,6 +66,13 @@ export let environments = {
     },
     3:{
         name: "Bay Day",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 5,
         radius: 400,
         category:"World",
@@ -60,6 +88,13 @@ export let environments = {
     },
     4:{
         name: "Beach Day",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 4.13,
         radius: 78.16,
         category:"World",
@@ -73,6 +108,13 @@ export let environments = {
     },
     5:{
         name: "Courtyard Day",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 2,
         radius: 16.71,
         category:"World",
@@ -87,6 +129,13 @@ export let environments = {
     },
     6:{
         name: "City Night",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 1.67,
         radius: 29,
         category:"World",
@@ -102,11 +151,13 @@ export let environments = {
     },
     7:{
         name: "Canyon Day",
+        
         light:{
-            x: 41,
-            y: 65,
+            x: 115,
+            y: 238,
             z: -7
         },
+
         height: 1,
         radius: 10,
         category:"World",
@@ -117,6 +168,13 @@ export let environments = {
     },
     8:{
         name: "Desert Dusk",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 1,
         radius: 16.71,
         category:"World",
@@ -132,6 +190,13 @@ export let environments = {
     },
     9:{
         name: "Forest Day",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 1,
         radius: 3,
         category:"Box",
@@ -147,6 +212,13 @@ export let environments = {
     },
     10:{
         name: "Loft Day",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 0.10,
         radius: 1000,
         category:"Box",
@@ -162,6 +234,13 @@ export let environments = {
     },
     11:{
         name: "Ocean Sunset",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 9,
         radius: 1000,
         category:"World",
@@ -177,6 +256,13 @@ export let environments = {
     },
     12:{
         name: "Garage Day",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 2.5,
         radius: 6.71,
         category:"Box",
@@ -191,6 +277,13 @@ export let environments = {
     },
     13:{
         name: "Pools Day",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 1.67,
         radius: 176.49,
         category:"World",
@@ -206,6 +299,13 @@ export let environments = {
     },
     14:{
         name: "Architecture Dusk",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 1,
         radius: 6.42,
         category:"World",
@@ -221,6 +321,13 @@ export let environments = {
     },
     15:{
         name: "Winter Day",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 1.5,
         radius: 16.71,
         category:"Box",
@@ -237,6 +344,13 @@ export let environments = {
 
     16:{
         name: "Tunnel Bright",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 1.5,
         radius: 3.71,
         category:"Box",
@@ -252,6 +366,13 @@ export let environments = {
     },
     17:{
         name: "Factory Dark",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 1.67,
         radius: 9,
         category:"World",
@@ -268,6 +389,13 @@ export let environments = {
 
     18:{
         name: "Sky Bright",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 6.59,
         radius: 1000,
         category:"World",
@@ -284,6 +412,13 @@ export let environments = {
 
     19:{
         name: "Architecture Colorful",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 1.67,
         radius: 23.71,
         category:"Box",
@@ -300,6 +435,13 @@ export let environments = {
 
     20:{
         name: "Architecture Rainy",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 1.44,
         radius: 6.71,
         category:"Box",
@@ -316,6 +458,13 @@ export let environments = {
     
     21:{
         name: "Tokyo Night",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 1.5,
         radius: 3.71,
         category:"Box",
@@ -332,6 +481,13 @@ export let environments = {
 
     22:{
         name: "Greathall Bright",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 1,
         radius: 15,
         category:"Box",
@@ -348,6 +504,13 @@ export let environments = {
 
     23:{
         name: "Interior Bright",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 1,
         radius: 3.42,
         category:"Box",
@@ -364,6 +527,13 @@ export let environments = {
 
     24:{
         name: "Hangar Bright",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 1,
         radius: 10,
         category:"Box",
@@ -380,6 +550,13 @@ export let environments = {
 
     25:{
         name: "Lobby Night",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 1,
         radius: 5,
         category:"Box",
@@ -395,6 +572,13 @@ export let environments = {
 
     26:{
         name: "Studio Bright",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 1,
         radius: 2,
         category:"Studio",
@@ -410,6 +594,13 @@ export let environments = {
 
     27:{
         name: "Studio Dark",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 1.5,
         radius: 3,
         category:"Box",
@@ -425,6 +616,13 @@ export let environments = {
 
     28:{
         name: "Station Afternoon",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 2,
         radius: 6.58,
         category:"Box",
@@ -441,6 +639,13 @@ export let environments = {
 
     29:{
         name: "Urban Dark",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 1.67,
         radius: 4.42,
         category:"Box",
@@ -456,6 +661,13 @@ export let environments = {
 
     30:{
         name: "Architecture Lights",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 1.67,
         radius: 5.42,
         category:"Box",
@@ -471,6 +683,13 @@ export let environments = {
     
     31:{
         name: "NYC Night",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 2,
         radius: 16.71,
         category:"Box",
@@ -486,6 +705,13 @@ export let environments = {
     
     32:{
         name: "NYC Overcast",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 2,
         radius: 29,
         category:"Box",
@@ -500,6 +726,13 @@ export let environments = {
     },
     33:{
         name: "Oculus Day",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 1,
         radius: 4,
         category:"Box",
@@ -515,6 +748,13 @@ export let environments = {
     
     34:{
         name: "Oculus Night",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 2,
         radius: 8.71,
         category:"Box",
@@ -530,6 +770,13 @@ export let environments = {
     
     35:{
         name: "Paris Morning",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 2,
         radius: 8,
         category:"Box",
@@ -545,6 +792,13 @@ export let environments = {
 
     36:{
         name: "Paris Afternoon",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 2,
         radius: 10,
         category:"Box",
@@ -560,6 +814,13 @@ export let environments = {
 
     37:{
         name: "Paris Overcast",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 1.67,
         radius: 8.71,
         category:"World",
@@ -575,6 +836,13 @@ export let environments = {
 
     38:{
         name: "Tokyo Day",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 2,
         radius: 7,
         category:"Box",
@@ -589,6 +857,13 @@ export let environments = {
     },
     39:{
         name: "Entry Warm",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 2,
         radius: 5,
         category:"Box",
@@ -603,6 +878,13 @@ export let environments = {
     },
     40:{
         name: "Overpass Dark",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 1.5,
         radius: 12,
         category:"Box",
@@ -617,6 +899,13 @@ export let environments = {
     },
     41:{
         name: "Iceland Morning",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 1,
         radius: 3,
         category:"World",
@@ -632,6 +921,13 @@ export let environments = {
 
     42:{
         name: "Substance Studio Tomoco",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 0.10,
         radius: 1000,
         category:"Studio",
@@ -646,6 +942,13 @@ export let environments = {
     },
     43:{
         name: "Substance Studio 6",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 1,
         radius: 2,
         category:"Box",
@@ -660,6 +963,13 @@ export let environments = {
     },
     44:{
         name: "Modelviewer Studio Neutral",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 2,
         radius: 3,
         category:"Studio",
@@ -675,6 +985,13 @@ export let environments = {
 
     45:{
         name: "Rhino Studio",
+        
+        light:{
+            x: 41,
+            y: 65,
+            z: -7
+        },
+
         height: 1,
         radius: 2,
         category:"Studio",
