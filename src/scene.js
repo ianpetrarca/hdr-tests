@@ -199,7 +199,8 @@ function init() {
 			params.lightPositionZ = environments[envNames.indexOf(params.environment)].light.z
 			params.lightPositionZ = environments[envNames.indexOf(params.environment)].light.z
 			params.shadowIntensity = environments[envNames.indexOf(params.environment)].shadowIntensity
-		
+			plane.material.opacity = params.shadowIntensity
+			plane.material.needsUpdate = true
 			light.position.set( params.lightPositionX, params.lightPositionY,params.lightPositionZ ); 		
 		});
 
