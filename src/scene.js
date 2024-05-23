@@ -191,8 +191,14 @@ function init() {
 			
 			params.height = environments[envNames.indexOf(params.environment)].height
 			params.radius = environments[envNames.indexOf(params.environment)].radius
-			
+			params.lightPositionX = environments[envNames.indexOf(params.environment)].light.x
+			params.lightPositionY = environments[envNames.indexOf(params.environment)].light.y
+			params.lightPositionZ = environments[envNames.indexOf(params.environment)].light.z
+			light.position.set( params.lightPositionX, params.lightPositionY,params.lightPositionZ ); 		
 		});
+
+
+	
 	}
 
 	function changeFOV(){
