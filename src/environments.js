@@ -157,7 +157,8 @@ export let environments = {
             y: 238,
             z: -7
         },
-
+        shadowIntensity:1,
+        shadowRadius: 5,
         height: 1,
         radius: 10,
         category:"World",

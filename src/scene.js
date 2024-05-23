@@ -39,10 +39,11 @@ let params = {
 	fov:50,
 	height: environments[selectedEnvironment].height,
 	radius: environments[selectedEnvironment].radius,
-	shadowIntensity: 1,
+	shadowIntensity:  environments[selectedEnvironment].shadowIntensity,
 	lightPositionX: environments[selectedEnvironment].light.x,
 	lightPositionY: environments[selectedEnvironment].light.y,
 	lightPositionZ: environments[selectedEnvironment].light.z,
+	shadowRadius: environments[selectedEnvironment].shadowRadius
 	
 };
 
@@ -95,6 +96,7 @@ function init() {
 	gui.add( params, 'radius', 0, 1000, 0.01 ).onChange( changeRadius ).listen();
 	gui.add( params, 'fov', 1, 100, 0.01 ).onChange( changeFOV ).listen();
 	gui.add( params, 'shadowIntensity', .01, 1, 0.01 ).onChange( changeShadow ).listen();
+	gui.add( params, 'shadowRadius', .01, 5000, 0.01 ).onChange( changeShadow ).listen();
 	gui.add( params, 'lightPositionX', -1000, 1000, 0.01 ).onChange( changeLight ).listen();
 	gui.add( params, 'lightPositionY', 0, 1000, 0.01 ).onChange( changeLight ).listen();
 	gui.add( params, 'lightPositionZ', -1000, 1000, 0.01 ).onChange( changeLight ).listen();
@@ -108,7 +110,8 @@ function init() {
 
 	helper = new THREE.CameraHelper( light.shadow.camera );
 	scene.add( helper );
-	
+	light.shadow.radius = 4
+	light.shadow.blurSamples = 8
 	light.shadow.camera.near = 0.1;
 	light.shadow.camera.far = 500;
 	light.shadow.camera.right = 17;
@@ -119,7 +122,7 @@ function init() {
 	light.shadow.mapSize.height = 512;
 	//Create a plane that receives shadows (but does not cast them)
 	const planeGeometry = new THREE.PlaneGeometry( 2000, 2000, 32, 32 );
-	const planeMaterial = new THREE.ShadowMaterial( { color: 0x000000,opacity:1 } )
+	const planeMaterial = new THREE.ShadowMaterial( { color: 0x000000,opacity: params.shadowIntensity} )
 	const plane = new THREE.Mesh( planeGeometry, planeMaterial );
 	plane.receiveShadow = true;
 	scene.add( plane );
@@ -194,6 +197,9 @@ function init() {
 			params.lightPositionX = environments[envNames.indexOf(params.environment)].light.x
 			params.lightPositionY = environments[envNames.indexOf(params.environment)].light.y
 			params.lightPositionZ = environments[envNames.indexOf(params.environment)].light.z
+			params.lightPositionZ = environments[envNames.indexOf(params.environment)].light.z
+			params.shadowIntensity = environments[envNames.indexOf(params.environment)].shadowIntensity
+		
 			light.position.set( params.lightPositionX, params.lightPositionY,params.lightPositionZ ); 		
 		});
 
@@ -207,8 +213,11 @@ function init() {
 	}
 
 	function changeShadow(){
+		light.shadow.radius = params.shadowRadius
+
 		plane.material.opacity = params.shadowIntensity
 		plane.material.needsUpdate = true
+
 	}
 	
 }
