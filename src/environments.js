@@ -8,6 +8,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.1,
+        shadowRadius: 5,
+
+        
+        
         height: 10,
         radius: 1000,
         category:"World",
@@ -29,6 +34,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.1,
+        shadowRadius: 5,
+
+        
+        
         height: 0.10,
         radius: 1000,
         category:"World",
@@ -51,6 +61,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 1.5,
         radius: 13.71,
         category:"World",
@@ -73,6 +88,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 5,
         radius: 400,
         category:"World",
@@ -95,6 +115,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 4.13,
         radius: 78.16,
         category:"World",
@@ -115,6 +140,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 2,
         radius: 16.71,
         category:"World",
@@ -136,6 +166,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 1.67,
         radius: 29,
         category:"World",
@@ -157,8 +192,12 @@ export let environments = {
             y: 238,
             z: -7
         },
-        shadowIntensity:1,
+        
+        
+     shadowIntensity:.5,
         shadowRadius: 5,
+       
+        
         height: 1,
         radius: 10,
         category:"World",
@@ -176,6 +215,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 1,
         radius: 16.71,
         category:"World",
@@ -198,6 +242,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 1,
         radius: 3,
         category:"Box",
@@ -220,6 +269,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 0.10,
         radius: 1000,
         category:"Box",
@@ -242,6 +296,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 9,
         radius: 1000,
         category:"World",
@@ -264,6 +323,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 2.5,
         radius: 6.71,
         category:"Box",
@@ -285,6 +349,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 1.67,
         radius: 176.49,
         category:"World",
@@ -307,6 +376,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 1,
         radius: 6.42,
         category:"World",
@@ -329,6 +403,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 1.5,
         radius: 16.71,
         category:"Box",
@@ -352,6 +431,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 1.5,
         radius: 3.71,
         category:"Box",
@@ -374,6 +458,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 1.67,
         radius: 9,
         category:"World",
@@ -397,6 +486,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 6.59,
         radius: 1000,
         category:"World",
@@ -420,6 +514,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 1.67,
         radius: 23.71,
         category:"Box",
@@ -443,6 +542,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 1.44,
         radius: 6.71,
         category:"Box",
@@ -466,6 +570,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 1.5,
         radius: 3.71,
         category:"Box",
@@ -489,6 +598,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 1,
         radius: 15,
         category:"Box",
@@ -512,6 +626,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 1,
         radius: 3.42,
         category:"Box",
@@ -535,6 +654,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 1,
         radius: 10,
         category:"Box",
@@ -558,6 +682,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 1,
         radius: 5,
         category:"Box",
@@ -580,6 +709,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 1,
         radius: 2,
         category:"Studio",
@@ -602,6 +736,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 1.5,
         radius: 3,
         category:"Box",
@@ -624,6 +763,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 2,
         radius: 6.58,
         category:"Box",
@@ -647,6 +791,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 1.67,
         radius: 4.42,
         category:"Box",
@@ -669,6 +818,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 1.67,
         radius: 5.42,
         category:"Box",
@@ -691,6 +845,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 2,
         radius: 16.71,
         category:"Box",
@@ -713,6 +872,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 2,
         radius: 29,
         category:"Box",
@@ -734,6 +898,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 1,
         radius: 4,
         category:"Box",
@@ -756,6 +925,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 2,
         radius: 8.71,
         category:"Box",
@@ -778,6 +952,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 2,
         radius: 8,
         category:"Box",
@@ -800,6 +979,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 2,
         radius: 10,
         category:"Box",
@@ -822,6 +1006,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 1.67,
         radius: 8.71,
         category:"World",
@@ -844,6 +1033,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 2,
         radius: 7,
         category:"Box",
@@ -865,6 +1059,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 2,
         radius: 5,
         category:"Box",
@@ -886,6 +1085,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 1.5,
         radius: 12,
         category:"Box",
@@ -907,6 +1111,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 1,
         radius: 3,
         category:"World",
@@ -929,6 +1138,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 0.10,
         radius: 1000,
         category:"Studio",
@@ -950,6 +1164,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 1,
         radius: 2,
         category:"Box",
@@ -971,6 +1190,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 2,
         radius: 3,
         category:"Studio",
@@ -993,6 +1217,11 @@ export let environments = {
             z: -7
         },
 
+         shadowIntensity:.5,
+        shadowRadius: 5,
+
+        
+        
         height: 1,
         radius: 2,
         category:"Studio",
